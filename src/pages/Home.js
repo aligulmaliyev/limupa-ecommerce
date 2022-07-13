@@ -1,4 +1,5 @@
 import React from 'react'
+import Modal from '../components/modal/Modal'
 import Banner from '../containers/home/Banner'
 import BeginStaticBanner from '../containers/home/BeginStaticBanner'
 import ProductsContainer from '../containers/home/ProductsContainer'
@@ -31,6 +32,7 @@ const Home = () => {
       <BeginStaticBanner />
       <ProductsContainer title="Trendding Products" data={[]} categories={categories} />
       <ProductsContainer title="Bestsellers" data={[]} categories={categories} />
+      <Modal/>
     </>
   )
 }
