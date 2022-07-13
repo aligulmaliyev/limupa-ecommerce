@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const Modal = () => {
+const Modal = ({ isVisible, close }) => {
     const [imgSrc, setImgSrc] = useState('1.jpg');
 
     const handleChangeImgSrc = (src) => {
         setImgSrc(src);
     }
-    //show - show modal class
     return (
-        <div class="modal fade modal-wrapper " id="exampleModalCenter" >
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class={isVisible ? 'modal fade modal-wrapper show' : 'modal fade modal-wrapper'}  >
+            <div class="modal-dialog modal-dialog-centered" >
                 <div class="modal-content">
                     <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button onClick={close} type="button" class="close" >
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <div class="modal-inner-area row">
