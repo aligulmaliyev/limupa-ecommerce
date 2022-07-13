@@ -1,13 +1,13 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import Navbar from './navbar/Navbar';
+import Header from './header/Header';
 
 const Layout = () => {
     return (
-        <>
-            <Navbar />
+        <div className="body-wrapper">
+            <Header />
             <Outlet />
-        </>
+        </div>
     )
 }
 
