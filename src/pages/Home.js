@@ -34,7 +34,7 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <TabProducts />
+      <TabProducts data={products} />
       <StaticBanner />
       <ProductsContainer title="Laptop" data={products} categories={CATEGORIES} filterKey={1} />
       <ProductsContainer title='TV & Audio' data={products} categories={CATEGORIES} filterKey={1} />
