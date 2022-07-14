@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 const Breadcrumb = ({page}) => {
     return (
-        <div class="breadcrumb-area">
-            <div class="container">
-                <div class="breadcrumb-content">
+        <div className="breadcrumb-area">
+            <div className="container">
+                <div className="breadcrumb-content">
                     <ul>
                         <li><Link to='/'>Home</Link></li>
-                        <li class="active">{page}</li>
+                        <li className="active">{page}</li>
                     </ul>
                 </div>
             </div>

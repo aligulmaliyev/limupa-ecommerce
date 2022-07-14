@@ -1,31 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../../components/card/Card';
-import TabLinks from './TabLinks';
+import { Tab } from '../../components/tab/Tab'
+// import TabLinks from './TabLinks';
 
 const TabProducts = ({ data = [] }) => {
     const [activeTab, setActiveTab] = useState(3);
-    const [tabData, setTabData] = useState(data);
+    const [contentData, setContentData] = useState(data);
+    const [tabLinkData, setTabLinkData] = useState([]);
 
     const changeTab = (val) => {
         setActiveTab(val)
     }
+
+    useEffect(() => {
+        let type = data?.map(product => product.type);
+        let unique = type.filter((value, index, self) => {
+            let allId = self.map(i => i.id)
+            return allId.indexOf(value.id) === index;
+        });
+        setTabLinkData(unique)
+    }, [data])
+
     useEffect(() => {
         let filteredData = data?.filter(product => product.type.id === activeTab);
-        setTabData(filteredData)
+        setContentData(filteredData)
     }, [data, activeTab])
+
     return (
         <div className="product-area  pt-60 pb-45">
             <div className="container">
-                    <TabLinks onChange={changeTab} active={activeTab} />
-                <div className='row'>
+                <Tab.TabNav onChange={changeTab} active={activeTab} data={tabLinkData} />
+                <Tab.TabContent>
                     {
-                        tabData?.map(product => (
-                            <div className='col-lg-3'>
+                        contentData?.map(product => (
+                            <div key={product.id} className='col-lg-3'>
                                 <Card data={product} />
                             </div>
                         ))
                     }
-                </div>
+                </Tab.TabContent>
             </div>
         </div>
     )
