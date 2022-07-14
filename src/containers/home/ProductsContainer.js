@@ -17,7 +17,7 @@ const ProductsContainer = ({ title, categories = [], data = [], filterKey }) => 
                                 <ul className="li-sub-category-list">
                                     {
                                         categories.map(category => (
-                                            <li><NavLink to={`/products/category/${category.id}`} >{category.name}</NavLink></li>
+                                            <li key={category.id}><NavLink  to={`/products/category/${category.id}`} >{category.name}</NavLink></li>
                                         ))
                                     }
                                 </ul>}
@@ -26,7 +26,7 @@ const ProductsContainer = ({ title, categories = [], data = [], filterKey }) => 
                             {
                                 parseData.slice(0, 4).map(product => (
                                     <div key={product.id} className='col-lg-3'>
-                                        <Card data={product}/>
+                                        <Card data={product} />
                                     </div>
                                 ))
                             }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 import Modal from '../modal/Modal';
 import { cartActions } from '../../store/slices/cart-slice';
@@ -9,13 +9,12 @@ const Card = ({ data }) => {
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [discount, setDiscount] = useState({ isDiscount: false, discountValue: 0, discountedPrice: null });
 
-    const cart = useSelector(state => state.cart);
     const dispatch = useDispatch()
     const handleModal = () => {
         setIsVisibleModal(prev => !prev);
     }
 
-    const addToCart = () => {
+    const addToCart = useCallback(() => {
         dispatch(cartActions.addToCart({
             name: data?.name,
             image: data?.images[0],
@@ -24,15 +23,18 @@ const Card = ({ data }) => {
             quantity: 1,
             totalPrice: data?.price
         }))
-    }
+    },[data,dispatch])
 
-    const getDiscount = () => {
-        let isDiscount = data?.discount > 0;
-        if (isDiscount) {
-            let discountedPrice = getDicountValue(data?.price, discount.discountValue)
-            setDiscount({ isDiscount: true, discountValue: data?.discount, discountedPrice: discountedPrice });
-        }
-    }
+    const getDiscount = useCallback(
+        () => {
+            let isDiscount = data?.discount > 0;
+            if (isDiscount) {
+                let discountedPrice = getDicountValue(data?.price, discount.discountValue)
+                setDiscount({ isDiscount: true, discountValue: data?.discount, discountedPrice: discountedPrice });
+            }
+        },
+        [data, discount],
+    )
 
     useEffect(() => {
         getDiscount()
@@ -43,7 +45,7 @@ const Card = ({ data }) => {
             <div className="single-product-wrap">
                 <div className="product-image">
                     <Link to={`/product/${data?.id}`}>
-                        <img src={`assets/images/product/large-size/${data?.images[Math.floor(Math.random() * 5)]}`} alt="Li's Product Image" />
+                        <img src={`assets/images/product/large-size/${data?.images[Math.floor(Math.random() * 5)]}`} alt="Li's Product" />
                     </Link>
                     {data?.new && <span className="sticker">New</span>}
                 </div>

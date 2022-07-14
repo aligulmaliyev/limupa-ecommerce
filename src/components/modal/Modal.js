@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link,useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { cartActions } from '../../store/slices/cart-slice';
@@ -24,11 +24,11 @@ const Modal = ({ isVisible, close, id }) => {
     }
 
     const changeQuantity = (type) => {
-        if (type == "INC") {
+        if (type === "INC") {
             setQuantity(prevQua => prevQua += 1)
         }
         else {
-            if (quantity == 1) {
+            if (quantity === 1) {
                 return;
             }
             else {
@@ -55,20 +55,20 @@ const Modal = ({ isVisible, close, id }) => {
     }
 
     useEffect(() => {
-        let existingProduct = products?.find(product => product.id == id);
+        let existingProduct = products?.find(product => product.id === id);
         setDimension(existingProduct?.dimension)
         setImages(existingProduct?.images)
         setProduct(existingProduct)
-    }, [products])
+    }, [products,id])
 
     useEffect(() => {
-        let addedCart = cartItems?.find(cartItem => cartItem.id == id);
+        let addedCart = cartItems?.find(cartItem => cartItem.id === id);
         if (addedCart) {
             setImgSrc(addedCart.image);
             setQuantity(addedCart.quantity)
             setAddedCart(addedCart)
         }
-    }, [cartItems, products])
+    }, [cartItems, products,id])
 
     return (
         <div className={isVisible ? 'modal fade modal-wrapper show' : 'modal fade modal-wrapper'}  >
@@ -83,15 +83,15 @@ const Modal = ({ isVisible, close, id }) => {
                                 <div className="product-details-left">
                                     <div className="product-details-images slider-navigation-1">
                                         <div className="lg-image">
-                                            <img src={`assets/images/product/large-size/${imgSrc}`} alt="product image" />
+                                            <img src={`assets/images/product/large-size/${imgSrc}`} alt="product" />
                                         </div>
                                     </div>
                                     <div className="product-details-thumbs slider-thumbs-1">
                                         <Swiper slidesPerView={4} loop={true}>
                                             {
-                                                images?.map(img => (
-                                                    <SwiperSlide>
-                                                        <div className="sm-image"><img onClick={() => handleChangeImgSrc(img)} src={`assets/images/product/small-size/${img}`} alt="product image thumb" /></div>
+                                                images?.map((img, index) => (
+                                                    <SwiperSlide key={index}>
+                                                        <div className="sm-image"><img onClick={() => handleChangeImgSrc(img)} src={`assets/images/product/small-size/${img}`} alt="product thumb" /></div>
                                                     </SwiperSlide>
                                                 ))
                                             }
@@ -130,7 +130,7 @@ const Modal = ({ isVisible, close, id }) => {
                                                 <select className="nice-select" onClick={handlerDimension}>
                                                     {
                                                         dimension?.map(dimension => (
-                                                            <option value={dimension.id} selected={addedCart?.dimension?.id == dimension.id} >{dimension.name}</option>
+                                                            <option key={dimension.id} value={dimension.id} defaultValue={addedCart?.dimension?.id === dimension.id} >{dimension.name}</option>
                                                         ))
                                                     }
                                                 </select>
@@ -141,7 +141,7 @@ const Modal = ({ isVisible, close, id }) => {
                                                 <div className="quantity">
                                                     <label>Quantity</label>
                                                     <div className="cart-plus-minus">
-                                                        <input className="cart-plus-minus-box" value={quantity} type="text" />
+                                                        <input className="cart-plus-minus-box" defaultValue={quantity} type="text" />
                                                         <div onClick={() => changeQuantity("DEC")} className="dec qtybutton"><i className="fa fa-angle-down"></i></div>
                                                         <div onClick={() => changeQuantity("INC")} className="inc qtybutton"><i className="fa fa-angle-up"></i></div>
                                                     </div>

@@ -10,13 +10,13 @@ function Navbar() {
                         <div className="hb-menu">
                             <nav>
                                 <ul>
-                                    <li><NavLink to="/" className={({ isActive }) => isActive && 'active-nav'}>Home</NavLink></li>
-                                    <li><NavLink to="/products" className={({ isActive }) => isActive && 'active-nav'}>Shop</NavLink></li>
-                                    <li><NavLink to="/blog" className={({ isActive }) => isActive && 'active-nav'}>Blog</NavLink></li>
-                                    <li><NavLink to="/about" className={({ isActive }) => isActive && 'active-nav'}>About</NavLink></li>
-                                    <li><NavLink to="/contact" className={({ isActive }) => isActive && 'active-nav'}>Contact</NavLink></li>
-                                    <li><NavLink to="/product/smartwatch" className={({ isActive }) => isActive && 'active-nav'}>Smartwatch</NavLink></li>
-                                    <li><NavLink to="/product/accessories" className={({ isActive }) => isActive && 'active-nav'}>Accessories</NavLink></li>
+                                    <li><NavLink to="/" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Home</NavLink></li>
+                                    <li><NavLink to="/products" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Shop</NavLink></li>
+                                    <li><NavLink to="/blog" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Blog</NavLink></li>
+                                    <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active-nav' : undefined}>About</NavLink></li>
+                                    <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Contact</NavLink></li>
+                                    <li><NavLink to="/product/smartwatch" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Smartwatch</NavLink></li>
+                                    <li><NavLink to="/product/accessories" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Accessories</NavLink></li>
                                 </ul>
                             </nav>
                         </div>
