@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import Modal from '../modal/Modal';
 import { cartActions } from '../../store/slices/cart-slice';
+import { getDicountValue } from '../../utils/getDiscountValue';
 
 const Card = ({ data }) => {
     const [isVisibleModal, setIsVisibleModal] = useState(false);
@@ -16,16 +17,19 @@ const Card = ({ data }) => {
 
     const addToCart = () => {
         dispatch(cartActions.addToCart({
-            ...data,
+            name: data?.name,
+            image: data?.images[0],
+            dimension: data?.dimension[0],
+            price: data?.price,
             quantity: 1,
-            totalPrice: 20
+            totalPrice: data?.price
         }))
     }
 
     const getDiscount = () => {
         let isDiscount = data?.discount > 0;
         if (isDiscount) {
-            let discountedPrice = data?.price - (data?.price * discount.discountValue / 100)
+            let discountedPrice = getDicountValue(data?.price, discount.discountValue)
             setDiscount({ isDiscount: true, discountValue: data?.discount, discountedPrice: discountedPrice });
         }
     }
@@ -79,7 +83,7 @@ const Card = ({ data }) => {
                     </div>
                 </div>
             </div>
-            <Modal data={data} isVisible={isVisibleModal} close={handleModal} />
+            <Modal id={data?.id} isVisible={isVisibleModal} close={handleModal} />
         </>
     )
 }
