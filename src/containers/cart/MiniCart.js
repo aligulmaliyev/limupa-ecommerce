@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ButtonLink from '../form-elements/buttons/ButtonLink';
+import ButtonLink from '../../components/form-elements/buttons/ButtonLink';
 
 const MiniCart = () => {
+    const cart = useSelector(state => state.cart);
     const [showMinicart, setShowMinicart] = useState(false)
     const handleMinicart = () => {
         setShowMinicart(perv => !perv)
@@ -11,17 +13,20 @@ const MiniCart = () => {
         <li className="hm-minicart">
             <div className="hm-minicart-trigger is-active" onClick={handleMinicart}>
                 <span className="item-icon"></span>
-                <span className="item-text">£80.00
-                    <span className="cart-item-count">2</span>
+                <span className="item-text">${cart.totalPrice}
+                    <span className="cart-item-count">{cart.totalQuantity}</span>
                 </span>
             </div>
             <span></span>
             {showMinicart && <div className='minicart'>
                 <ul className="minicart-product-list">
-                    <MiniCartItem />
-                    <MiniCartItem />
+                    {
+                        cart.cartItems?.slice(0, 3).map(cartItem => (
+                            <MiniCartItem data={cartItem} />
+                        ))
+                    }
                 </ul>
-                <p className="minicart-total">SUBTOTAL: <span>£80.00</span></p>
+                <p className="minicart-total">SUBTOTAL: <span>£{cart.totalPrice}</span></p>
                 <div className="minicart-button">
                     <ButtonLink type='dark' url='/cart' text='View Full Cart' />
                     <ButtonLink type='light' url='/checkout' text='Checkout' />
@@ -31,15 +36,15 @@ const MiniCart = () => {
     )
 }
 
-const MiniCartItem = () => {
+const MiniCartItem = ({ data }) => {
     return (
         <li>
-            <Link to='product' className="minicart-product-image">
-                <img src="assets/images/product/small-size/5.jpg" alt="cart products" />
+            <Link to={`/product/${data?.id}`} className="minicart-product-image">
+                <img src={`assets/images/product/small-size/${data?.image}`} alt="cart products" />
             </Link>
             <div className="minicart-product-details">
-                <h6><Link to='product'>Aenean eu tristique</Link></h6>
-                <span>£40 x 1</span>
+                <h6><Link to={`/product/${data?.id}`}>{data?.name}</Link></h6>
+                <span>${data?.totalPrice} x {data?.quantity}</span>
             </div>
             <button className="close" title="Remove">
                 <i className="fa fa-close"></i>

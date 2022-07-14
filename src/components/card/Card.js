@@ -16,6 +16,7 @@ const Card = ({ data }) => {
 
     const addToCart = useCallback(() => {
         dispatch(cartActions.addToCart({
+            id: data?.id,
             name: data?.name,
             image: data?.images[0],
             dimension: data?.dimension[0],
@@ -23,7 +24,7 @@ const Card = ({ data }) => {
             quantity: 1,
             totalPrice: data?.price
         }))
-    },[data,dispatch])
+    }, [data, dispatch])
 
     const getDiscount = useCallback(
         () => {

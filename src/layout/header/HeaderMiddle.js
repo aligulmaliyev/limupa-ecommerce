@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import MiniCart from '../../components/cart/MiniCart';
+import MiniCart from '../../containers/cart/MiniCart';
 import SearchBox from '../../components/form-elements/search-box/SearchBox';
 
 const HeaderMiddle = () => {
-    const handleSearch = (e)=>{
+    const handleSearch = (e) => {
 
     }
     return (
@@ -19,7 +19,7 @@ const HeaderMiddle = () => {
                         </div>
                     </div>
                     <div className="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
-                        <SearchBox onSearch={(e)=>handleSearch(e)} />
+                        <SearchBox onSearch={(e) => handleSearch(e)} />
                         <div className="header-middle-right">
                             <ul className="hm-menu">
                                 <li className="hm-wishlist">
