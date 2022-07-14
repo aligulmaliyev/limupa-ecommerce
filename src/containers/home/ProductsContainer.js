@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Card from '../../components/card/Card'
 
-const ProductsContainer = ({ title, categories, data }) => {
+const ProductsContainer = ({ title, categories = [], data = [], filterKey }) => {
+    const parseData = data.filter(item => item.categoryId == filterKey)
     return (
         <section className="product-area li-laptop-product pt-60 pb-45">
             <div className="container">
@@ -22,18 +23,13 @@ const ProductsContainer = ({ title, categories, data }) => {
                                 </ul>}
                         </div>
                         <div className='row'>
-                            <div className='col-lg-3'>
-                                <Card img='1.jpg' />
-                            </div>
-                            <div className='col-lg-3'>
-                                <Card img='2.jpg' />
-                            </div>
-                            <div className='col-lg-3'>
-                                <Card img='3.jpg' />
-                            </div>
-                            <div className='col-lg-3'>
-                                <Card img='4.jpg' />
-                            </div>
+                            {
+                                parseData.slice(0, 4).map(product => (
+                                    <div key={product.id} className='col-lg-3'>
+                                        <Card data={product}/>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>

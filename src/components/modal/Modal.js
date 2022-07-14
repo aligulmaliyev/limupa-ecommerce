@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-const Modal = ({ isVisible, close }) => {
-    const [imgSrc, setImgSrc] = useState('1.jpg');
+const Modal = ({ isVisible, close, data }) => {
+    const [imgSrc, setImgSrc] = useState(data?.images[2]);
 
     const handleChangeImgSrc = (src) => {
         setImgSrc(src);

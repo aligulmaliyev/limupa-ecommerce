@@ -2353,6 +2353,7 @@ textarea:focus {
 	border: 1px solid #e1e1e1;
 	transition: all 0.3s ease-in-out;
 	width: 120px;
+	cursor: pointer;
 }
 .add-actions-link li:hover {
 	background: #fed700;
