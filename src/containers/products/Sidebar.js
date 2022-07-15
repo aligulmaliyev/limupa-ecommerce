@@ -1,20 +1,50 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { brands, dimensions, sizes, colors, } from '../../data';
+import { useFilterHandle } from '../../hooks/useFilterHandle';
+import { fetchProducts } from '../../store/actions/product-actions';
 
 const Sidebar = () => {
+    const dispatch = useDispatch()
+    const [filters, onFilter, setFilters] = useFilterHandle(
+        {
+            brands: undefined,
+            dimensions: undefined,
+            colors: undefined,
+            sizes: undefined
+        },
+        ({ filters }) => {
+            dispatch(fetchProducts(filters))
+        }
+    );
+    const handleBrand = (value) => {
+        onFilter('brands', value)
+    }
+    const handleDimension = (value) => {
+        onFilter('dimensions', value)
+    }
+    const handleColor = (value) => {
+        onFilter('colors', value)
+    }
+    const handleSize = (value) => {
+        onFilter('sizes', value)
+    }
     return (
         <div className="sidebar-categores-box">
             <div className="sidebar-title">
                 <h2>Filter By</h2>
             </div>
-            <button className="btn-clear-all mb-sm-30 mb-xs-30">Clear all</button>
             <div className="filter-sub-area">
                 <h5 className="filter-sub-titel">Brand</h5>
                 <div className="categori-checkbox">
                     <form action="#">
                         <ul>
-                            <li><input type="checkbox" name="product-categori" /><a href="#">Prime Video (13)</a></li>
-                            <li><input type="checkbox" name="product-categori" /><a href="#">Computers (12)</a></li>
-                            <li><input type="checkbox" name="product-categori" /><a href="#">Electronics (11)</a></li>
+                            {
+                                brands.map(brand => (
+                                    <li key={brand.id}><input type="checkbox" name={brand.key} /><Link onClick={() => handleBrand(brand.id)} to={""}>{brand.name}</Link></li>
+                                ))
+                            }
                         </ul>
                     </form>
                 </div>
@@ -24,8 +54,11 @@ const Sidebar = () => {
                 <div className="categori-checkbox">
                     <form action="#">
                         <ul>
-                            <li><input type="checkbox" name="product-categori" /><a href="#">Graphic Corner (10)</a></li>
-                            <li><input type="checkbox" name="product-categori" /><a href="#"> Studio Design (6)</a></li>
+                            {
+                                brands.map(brand => (
+                                    <li key={brand.id}><input type="checkbox" name={brand.key} /><Link onClick={() => handleBrand(brand.id)} to={""}>{brand.name}</Link></li>
+                                ))
+                            }
                         </ul>
                     </form>
                 </div>
@@ -35,10 +68,16 @@ const Sidebar = () => {
                 <div className="size-checkbox">
                     <form action="#">
                         <ul>
-                            <li><input type="checkbox" name="product-size" /><a href="#">S (3)</a></li>
-                            <li><input type="checkbox" name="product-size" /><a href="#">M (3)</a></li>
-                            <li><input type="checkbox" name="product-size" /><a href="#">L (3)</a></li>
-                            <li><input type="checkbox" name="product-size" /><a href="#">XL (3)</a></li>
+                            {
+                                sizes.map(size => (
+                                    <li key={size.id}>
+                                        <input type="checkbox" name={size.id} id={size.id} />
+                                        <label htmlFor={size.id}>
+                                            <Link onClick={() => handleSize(size.id)} to={""}>{size.size}</Link>
+                                        </label>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </form>
                 </div>
@@ -48,10 +87,11 @@ const Sidebar = () => {
                 <div className="color-categoriy">
                     <form action="#">
                         <ul>
-                            <li><span className="white"></span><a href="#">White (1)</a></li>
-                            <li><span className="black"></span><a href="#">Black (1)</a></li>
-                            <li><span className="Orange"></span><a href="#">Orange (3) </a></li>
-                            <li><span className="Blue"></span><a href="#">Blue  (2) </a></li>
+                            {
+                                colors.map(color => (
+                                    <li key={color.id}><span style={{ backgroundColor: color.code }} ></span><Link onClick={() => handleColor(color.id)} to={""}>{color.name}</Link></li>
+                                ))
+                            }
                         </ul>
                     </form>
                 </div>
@@ -61,9 +101,11 @@ const Sidebar = () => {
                 <div className="categori-checkbox">
                     <form action="#">
                         <ul>
-                            <li><input type="checkbox" name="product-categori" /><a href="#">40x60cm (6)</a></li>
-                            <li><input type="checkbox" name="product-categori" /><a href="#">60x90cm (6)</a></li>
-                            <li><input type="checkbox" name="product-categori" /><a href="#">80x120cm (6)</a></li>
+                            {
+                                dimensions.map(dimension => (
+                                    <li key={dimension.id}><input type="checkbox" name={dimension.name} /><Link onClick={() => handleDimension(dimension.id)} to={""}>{dimension.name}</Link></li>
+                                ))
+                            }
                         </ul>
                     </form>
                 </div>

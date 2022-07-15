@@ -51,10 +51,10 @@ const Products = () => {
                                         <span>Showing {indexOfFirstPost} to {indexOfLastPost} of {products.length}</span>
                                     </div>
                                 </div>
-                                <div class="product-select-box">
-                                    <div class="product-short">
+                                <div className="product-select-box">
+                                    <div className="product-short">
                                         <p>Per Page:</p>
-                                        <select class="nice-select" onChange={(e) => setProductsPerPage(e.target.value)}>
+                                        <select className="nice-select" onChange={(e) => setProductsPerPage(e.target.value)}>
                                             {
                                                 pagePerSize.map(perSize => (
                                                     <option key={perSize} value={perSize}>{perSize}</option>
