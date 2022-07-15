@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../../components/card/Card';
 import { Tab } from '../../components/tab/Tab'
-// import TabLinks from './TabLinks';
 
 const TabProducts = ({ data = [] }) => {
-    const [activeTab, setActiveTab] = useState(3);
+    const [activeTab, setActiveTab] = useState(1);
     const [contentData, setContentData] = useState(data);
     const [tabLinkData, setTabLinkData] = useState([]);
 
