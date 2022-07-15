@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/slices/cart-slice';
 
@@ -51,9 +52,9 @@ const CartItem = ({ data }) => {
 
     return (
         <tr key={data.id}>
-            <td className="li-product-remove"><a><i className="fa fa-times"></i></a></td>
-            <td className="li-product-thumbnail"><a href="#"><img src={`assets/images/product/small-size/${data.image}`} alt="Li's Product" /></a></td>
-            <td className="li-product-name"><a href="#">{data.name}</a></td>
+            <td className="li-product-remove"><span><i className="fa fa-times"></i></span></td>
+            <td className="li-product-thumbnail"><Link to={`/product/${data.id}`}><img src={`assets/images/product/small-size/${data.image}`} alt="Li's Product" /></Link></td>
+            <td className="li-product-name"><Link to={`/product/${data.id}`}>{data.name}</Link></td>
             <td className="li-product-price"><span className="amount">${data.price}</span></td>
             <td className="quantity">
                 <label>Quantity</label>

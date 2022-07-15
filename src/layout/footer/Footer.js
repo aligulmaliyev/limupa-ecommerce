@@ -78,7 +78,7 @@ const Footer = () => {
                                     </li>
                                     <li>
                                         <span>Email: </span>
-                                        <a href="mailto://ali.gulmaliyov@gmail.com">ali.gulmaliyov@gmail.com</a>
+                                        <Link to="mailto://ali.gulmaliyov@gmail.com">ali.gulmaliyov@gmail.com</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -109,32 +109,32 @@ const Footer = () => {
                                     <h3 className="footer-block-title">Follow Us</h3>
                                     <ul className="social-link">
                                         <li className="twitter">
-                                            <a href="https://twitter.com/" data-toggle="tooltip" target="_blank" title="Twitter">
+                                            <a target='_blank' rel="noreferrer" href="https://twitter.com/" >
                                                 <i className="fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li className="rss">
-                                            <a href="https://rss.com/" data-toggle="tooltip" target="_blank" title="RSS">
+                                            <a target='_blank' rel="noreferrer" href="https://rss.com/" >
                                                 <i className="fa fa-rss"></i>
                                             </a>
                                         </li>
                                         <li className="google-plus">
-                                            <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank" title="Google Plus">
+                                            <a target='_blank' rel="noreferrer" href="https://www.plus.google.com/discover" >
                                                 <i className="fa fa-google-plus"></i>
                                             </a>
                                         </li>
                                         <li className="facebook">
-                                            <a href="https://www.facebook.com/" data-toggle="tooltip" target="_blank" title="Facebook">
+                                            <a target='_blank' rel="noreferrer" href="https://www.facebook.com/">
                                                 <i className="fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li className="youtube">
-                                            <a href="https://www.youtube.com/" data-toggle="tooltip" target="_blank" title="Youtube">
+                                            <a target='_blank' rel="noreferrer" href="https://www.youtube.com/">
                                                 <i className="fa fa-youtube"></i>
                                             </a>
                                         </li>
                                         <li className="instagram">
-                                            <a href="https://www.instagram.com/" data-toggle="tooltip" target="_blank" title="Instagram">
+                                            <a target='_blank' rel="noreferrer" href="https://www.instagram.com/">
                                                 <i className="fa fa-instagram"></i>
                                             </a>
                                         </li>
@@ -189,7 +189,7 @@ const Footer = () => {
                                 </Link>
                             </div>
                             <div className="copyright text-center pt-25">
-                                <span><a target="_blank" href="https://www.templateshub.net">Ali Gülmaliyev</a></span>
+                                <span><a href="https://www.aligulmaliyev.com" target='_blank' rel="noreferrer">Ali Gülmaliyev</a></span>
                             </div>
                         </div>
                     </div>
