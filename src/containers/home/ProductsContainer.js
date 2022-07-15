@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Card from '../../components/card/Card'
 
 const ProductsContainer = ({ title, categories = [], data = [], filterKey }) => {
-    const parseData = data.filter(item => item.categoryId == filterKey)
+    const parseData = data.filter(item => item.categoryId === filterKey)
     return (
         <section className="product-area li-laptop-product pt-60 pb-45">
             <div className="container">
@@ -25,7 +25,7 @@ const ProductsContainer = ({ title, categories = [], data = [], filterKey }) => 
                         <div className='row'>
                             {
                                 parseData.slice(0, 4).map(product => (
-                                    <div key={product.id} className='col-lg-3'>
+                                    <div key={product.id} className='col-lg-3 col-sm-6 col-12 '>
                                         <Card data={product} />
                                     </div>
                                 ))

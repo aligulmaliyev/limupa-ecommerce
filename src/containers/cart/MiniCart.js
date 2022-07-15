@@ -26,7 +26,7 @@ const MiniCart = () => {
                         ))
                     }
                     {
-                        cart.totalQuantity == '0' && <li style={{ textAlign: 'center', display: 'block' }}>Empty Cart</li>
+                        cart.totalQuantity === '0' && <li style={{ textAlign: 'center', display: 'block' }}>Empty Cart</li>
                     }
                 </ul>
                 <p className="minicart-total">SUBTOTAL: <span>£{cart.totalPrice}</span></p>

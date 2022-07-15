@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Cart from './pages/Cart';
@@ -5,6 +6,9 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 
 function App() {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   return (
     <BrowserRouter>
       <Routes>

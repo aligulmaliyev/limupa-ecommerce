@@ -7,7 +7,7 @@ import { getDicountValue } from '../../utils/getDiscountValue';
 
 const Card = ({ data }) => {
     const [isVisibleModal, setIsVisibleModal] = useState(false);
-    const [discount, setDiscount] = useState({ isDiscount: false, discountValue: 0, discountedPrice: null });
+    const [discount, setDiscount] = useState({ isDiscount: false, discountValue: 0, discountedPrice: 0 });
 
     const dispatch = useDispatch()
     const handleModal = () => {
@@ -21,10 +21,11 @@ const Card = ({ data }) => {
             image: data?.images[0],
             dimension: data?.dimension[0],
             price: data?.price,
+            discountPrice: discount.discountedPrice,
             quantity: 1,
             totalPrice: data?.price
         }))
-    }, [data, dispatch])
+    }, [data,discount, dispatch])
 
     const getDiscount = useCallback(
         () => {
@@ -34,7 +35,7 @@ const Card = ({ data }) => {
                 setDiscount({ isDiscount: true, discountValue: data?.discount, discountedPrice: discountedPrice });
             }
         },
-        [data, discount],
+        [data,discount],
     )
 
     useEffect(() => {

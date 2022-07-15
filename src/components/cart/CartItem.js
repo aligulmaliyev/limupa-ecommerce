@@ -6,8 +6,17 @@ const CartItem = ({ data }) => {
     const dispatch = useDispatch()
     const cartItems = useSelector(state => state.cart.cartItems);
     const [quantity, setQuantity] = useState(1);
+    const addToCart = useCallback(() => {
+        dispatch(cartActions.addToCart({
+            id: data?.id,
+            quantity,
+            price: data?.price,
+            totalPrice: quantity * data?.price
+        }))
+    }, [quantity, dispatch])
 
     const changeQuantity = (type) => {
+
         if (!isNaN(type) && typeof Number(type) === 'number') {
             setQuantity(type)
         }
@@ -22,22 +31,16 @@ const CartItem = ({ data }) => {
                 setQuantity(prevQua => prevQua -= 1)
             }
         }
+        addToCart()
     }
 
     const onBlurInput = () => {
         if (quantity <= 1) {
             setQuantity(1)
         }
+        addToCart()
     }
 
-    const addToCart = useCallback(() => {
-        dispatch(cartActions.addToCart({
-            id: data?.id,
-            quantity,
-            price: data?.price,
-            totalPrice: quantity * data?.price
-        }))
-    }, [quantity])
 
     useEffect(() => {
         let addedCart = cartItems?.find(cartItem => cartItem.id === data.id);
@@ -46,13 +49,9 @@ const CartItem = ({ data }) => {
         }
     }, [cartItems])
 
-    useEffect(() => {
-        addToCart()
-    }, [quantity])
-
     return (
         <tr key={data.id}>
-            <td className="li-product-remove"><a href="#"><i className="fa fa-times"></i></a></td>
+            <td className="li-product-remove"><a><i className="fa fa-times"></i></a></td>
             <td className="li-product-thumbnail"><a href="#"><img src={`assets/images/product/small-size/${data.image}`} alt="Li's Product" /></a></td>
             <td className="li-product-name"><a href="#">{data.name}</a></td>
             <td className="li-product-price"><span className="amount">${data.price}</span></td>

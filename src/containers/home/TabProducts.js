@@ -32,7 +32,7 @@ const TabProducts = ({ data = [] }) => {
                 <Tab.TabContent>
                     {
                         contentData?.map(product => (
-                            <div key={product.id} className='col-lg-3'>
+                            <div key={product.id} className='col-lg-3 col-sm-6 col-12 '>
                                 <Card data={product} />
                             </div>
                         ))

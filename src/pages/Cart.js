@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react'
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb'
 import CartItem from '../components/cart/CartItem';
-import { cartActions } from '../store/slices/cart-slice';
 
 const Cart = () => {
     const cart = useSelector(state => state.cart);
@@ -53,9 +53,9 @@ const Cart = () => {
                                         <h2>Cart totals</h2>
                                         <ul>
                                             <li>Subtotal <span>${cart.totalPrice}</span></li>
-                                            <li>Total <span>${cart.totalPrice}</span></li>
+                                            <li>Total <span>${cart.subtotalPrice}</span></li>
                                         </ul>
-                                        <a href="#">Proceed to checkout</a>
+                                        <Link to='/checkout'>Proceed to checkout</Link>
                                     </div>
                                 </div>
                             </div>
