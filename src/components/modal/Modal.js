@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,16 +24,25 @@ const Modal = ({ isVisible, close, id }) => {
     }
 
     const changeQuantity = (type) => {
-        if (type === "INC") {
+        if (!isNaN(type) && typeof Number(type) === 'number') {
+            setQuantity(type)
+        }
+        else if (type === "INC") {
             setQuantity(prevQua => prevQua += 1)
         }
         else {
-            if (quantity === 1) {
-                return;
+            if (quantity <= 1) {
+                setQuantity(1)
             }
             else {
                 setQuantity(prevQua => prevQua -= 1)
             }
+        }
+    }
+
+    const handleBlur = () => {
+        if (quantity <= 1) {
+            setQuantity(1)
         }
     }
 
@@ -42,9 +51,10 @@ const Modal = ({ isVisible, close, id }) => {
         setSelectedDimension(dimensionId)
     }
 
-    const addToCart = (e) => {
+    const addToCart = useCallback((e) => {
         e.preventDefault()
         dispatch(cartActions.addToCart({
+            id:product?.id,
             name: product?.name,
             image: imgSrc,
             dimension: selectedDimension,
@@ -52,14 +62,14 @@ const Modal = ({ isVisible, close, id }) => {
             quantity: quantity,
             totalPrice: quantity * product?.price
         }))
-    }
+    }, [product, imgSrc, selectedDimension, quantity, dispatch])
 
     useEffect(() => {
         let existingProduct = products?.find(product => product.id === id);
         setDimension(existingProduct?.dimension)
         setImages(existingProduct?.images)
         setProduct(existingProduct)
-    }, [products,id])
+    }, [products, id])
 
     useEffect(() => {
         let addedCart = cartItems?.find(cartItem => cartItem.id === id);
@@ -68,7 +78,7 @@ const Modal = ({ isVisible, close, id }) => {
             setQuantity(addedCart.quantity)
             setAddedCart(addedCart)
         }
-    }, [cartItems, products,id])
+    }, [cartItems, products, id])
 
     return (
         <div className={isVisible ? 'modal fade modal-wrapper show' : 'modal fade modal-wrapper'}  >
@@ -141,7 +151,7 @@ const Modal = ({ isVisible, close, id }) => {
                                                 <div className="quantity">
                                                     <label>Quantity</label>
                                                     <div className="cart-plus-minus">
-                                                        <input className="cart-plus-minus-box" defaultValue={quantity} type="text" />
+                                                        <input onChange={(e) => changeQuantity(e.target.value)} onBlur={handleBlur} className="cart-plus-minus-box" value={quantity} type="text" />
                                                         <div onClick={() => changeQuantity("DEC")} className="dec qtybutton"><i className="fa fa-angle-down"></i></div>
                                                         <div onClick={() => changeQuantity("INC")} className="inc qtybutton"><i className="fa fa-angle-up"></i></div>
                                                     </div>

@@ -22,14 +22,17 @@ const MiniCart = () => {
                 <ul className="minicart-product-list">
                     {
                         cart.cartItems?.slice(0, 3).map(cartItem => (
-                            <MiniCartItem data={cartItem} />
+                            <MiniCartItem key={cartItem.id} data={cartItem} />
                         ))
+                    }
+                    {
+                        cart.totalQuantity == '0' && <li style={{ textAlign: 'center', display: 'block' }}>Empty Cart</li>
                     }
                 </ul>
                 <p className="minicart-total">SUBTOTAL: <span>£{cart.totalPrice}</span></p>
                 <div className="minicart-button">
-                    <ButtonLink type='dark' url='/cart' text='View Full Cart' />
-                    <ButtonLink type='light' url='/checkout' text='Checkout' />
+                    <ButtonLink onClick={handleMinicart} type='dark' url='/cart' text='View Full Cart' />
+                    <ButtonLink onClick={handleMinicart} type='light' url='/checkout' text='Checkout' />
                 </div>
             </div>}
         </li>
