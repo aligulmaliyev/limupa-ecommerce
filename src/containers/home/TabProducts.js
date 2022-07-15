@@ -33,7 +33,7 @@ const TabProducts = ({ data = [] }) => {
                     {
                         contentData?.map(product => (
                             <div key={product.id} className='col-lg-3 col-sm-6 col-12 '>
-                                <Card data={product} />
+                                <Card data={product} type='normal' />
                             </div>
                         ))
                     }
