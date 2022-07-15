@@ -11,7 +11,7 @@ const Pagination = ({ itemPerPage, totalItems,currentPage, paginate }) => {
         <ul className="pagination-box pt-xs-20 pb-xs-15">
             {
                 pageNumbers.map((number) => (
-                    <li key={number} className={number==currentPage&& "active"}><Link to='/products' onClick={() => paginate(number)}>{number}</Link></li>
+                    <li key={number} className={number==currentPage?"active":undefined}><Link to='/products' onClick={() => paginate(number)}>{number}</Link></li>
                 ))
             }
         </ul>

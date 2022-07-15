@@ -43,8 +43,8 @@ const Products = () => {
                                 <div className="shop-bar-inner">
                                     <div className="product-view-mode">
                                         <ul className="nav shop-item-filter-list" role="tablist">
-                                            <li onClick={() => handleOrderType('normal')}><span className={orderType === 'normal' && "active"}><i className="fa fa-th"></i></span></li>
-                                            <li onClick={() => handleOrderType('list')}  ><span className={orderType === 'list' && "active"}><i className="fa fa-th-list"></i></span></li>
+                                            <li onClick={() => handleOrderType('normal')}><span className={orderType === 'normal' ? "active" : undefined}><i className="fa fa-th"></i></span></li>
+                                            <li onClick={() => handleOrderType('list')}  ><span className={orderType === 'list' ? "active" : undefined}><i className="fa fa-th-list"></i></span></li>
                                         </ul>
                                     </div>
                                     <div className="toolbar-amount">
