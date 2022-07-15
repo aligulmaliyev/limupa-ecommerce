@@ -14,6 +14,7 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage, setProductsPerPage] = useState(5)
 
+    const pagePerSize = [5, 10, 15, 20];
     const indexOfLastPost = currentPage * productsPerPage;
     const indexOfFirstPost = indexOfLastPost - productsPerPage;
     const currentProducts = products?.slice(indexOfFirstPost, indexOfLastPost);
@@ -46,13 +47,20 @@ const Products = () => {
                                             <li onClick={() => handleOrderType('list')}  ><span className={orderType === 'list' && "active"}><i className="fa fa-th-list"></i></span></li>
                                         </ul>
                                     </div>
-
+                                    <div className="toolbar-amount">
+                                        <span>Showing {indexOfFirstPost} to {indexOfLastPost} of {products.length}</span>
+                                    </div>
                                 </div>
-                                <div className="product-select-box">
-                                    <div className="product-short">
-                                        <div className="toolbar-amount">
-                                            <span>Showing 1 to 9 of {products.length}</span>
-                                        </div>
+                                <div class="product-select-box">
+                                    <div class="product-short">
+                                        <p>Per Page:</p>
+                                        <select class="nice-select" onChange={(e) => setProductsPerPage(e.target.value)}>
+                                            {
+                                                pagePerSize.map(perSize => (
+                                                    <option key={perSize} value={perSize}>{perSize}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -86,10 +94,10 @@ const Products = () => {
                                     <div className="paginatoin-area">
                                         <div className="row">
                                             <div className="col-lg-6 col-md-6 pt-xs-15">
-                                                <p>Showing 1-12 of 13 item(s)</p>
+                                                <p>Showing {indexOfFirstPost} to {indexOfLastPost} of {products.length} product{products.length > 1 && 's'}</p>
                                             </div>
                                             <div className="col-lg-6 col-md-6">
-                                                <Pagination itemPerPage={productsPerPage} totalItems={products.length} paginate={paginate} />
+                                                <Pagination itemPerPage={productsPerPage} totalItems={products.length} paginate={paginate} currentPage={currentPage} />
                                             </div>
                                         </div>
                                     </div>
