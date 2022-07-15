@@ -52,8 +52,8 @@ const Cart = () => {
                                     <div className="cart-page-total">
                                         <h2>Cart totals</h2>
                                         <ul>
-                                            <li>Subtotal <span>${cart.totalPrice}</span></li>
-                                            <li>Total <span>${cart.subtotalPrice}</span></li>
+                                            <li>Subtotal <span>${cart.subtotalPrice}</span></li>
+                                            <li>Total <span>${cart.totalPrice}</span></li>
                                         </ul>
                                         <Link to='/checkout'>Proceed to checkout</Link>
                                     </div>

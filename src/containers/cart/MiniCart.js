@@ -13,7 +13,7 @@ const MiniCart = () => {
         <li className="hm-minicart">
             <div className="hm-minicart-trigger is-active" onClick={handleMinicart}>
                 <span className="item-icon"></span>
-                <span className="item-text">${cart.totalPrice}
+                <span className="item-text">${cart.subtotalPrice}
                     <span className="cart-item-count">{cart.totalQuantity}</span>
                 </span>
             </div>
@@ -29,7 +29,7 @@ const MiniCart = () => {
                         cart.totalQuantity === '0' && <li style={{ textAlign: 'center', display: 'block' }}>Empty Cart</li>
                     }
                 </ul>
-                <p className="minicart-total">SUBTOTAL: <span>£{cart.totalPrice}</span></p>
+                <p className="minicart-total">SUBTOTAL: <span>£{cart.subtotalPrice}</span></p>
                 <div className="minicart-button">
                     <ButtonLink onClick={handleMinicart} type='dark' url='/cart' text='View Full Cart' />
                     <ButtonLink onClick={handleMinicart} type='light' url='/checkout' text='Checkout' />
