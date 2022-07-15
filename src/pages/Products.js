@@ -5,11 +5,20 @@ import Breadcrumb from '../components/breadcrumb/Breadcrumb'
 import Card from '../components/card/Card';
 import Sidebar from '../containers/products/Sidebar';
 import { Link } from 'react-router-dom';
+import Pagination from '../components/pagination/Pagination';
 
 const Products = () => {
     const products = useSelector(state => state.products.allProducts);
     const dispatch = useDispatch();
     const [orderType, setOrderType] = useState('normal')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [productsPerPage, setProductsPerPage] = useState(5)
+
+    const indexOfLastPost = currentPage * productsPerPage;
+    const indexOfFirstPost = indexOfLastPost - productsPerPage;
+    const currentProducts = products?.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const handleOrderType = (type) => {
         setOrderType(type)
@@ -53,7 +62,7 @@ const Products = () => {
                                         <div className="product-area shop-product-area">
                                             <div className="row">
                                                 {
-                                                    products?.map(product => (
+                                                    currentProducts?.map(product => (
                                                         <div key={product.id} className="col-lg-4 col-md-4 col-sm-6 mt-40">
                                                             <Card data={product} type={orderType} />
                                                         </div>
@@ -66,7 +75,7 @@ const Products = () => {
                                         <div className="row">
                                             <div className="col">
                                                 {
-                                                    products?.map(product => (
+                                                    currentProducts?.map(product => (
                                                         <Card key={product.id} data={product} type={orderType} />
                                                     ))
                                                 }
@@ -80,16 +89,7 @@ const Products = () => {
                                                 <p>Showing 1-12 of 13 item(s)</p>
                                             </div>
                                             <div className="col-lg-6 col-md-6">
-                                                <ul className="pagination-box pt-xs-20 pb-xs-15">
-                                                    <li><a href="#" className="Previous"><i className="fa fa-chevron-left"></i> Previous</a>
-                                                    </li>
-                                                    <li className="active"><a href="#">1</a></li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
-                                                    <li>
-                                                        <a href="#" className="Next"> Next <i className="fa fa-chevron-right"></i></a>
-                                                    </li>
-                                                </ul>
+                                                <Pagination itemPerPage={productsPerPage} totalItems={products.length} paginate={paginate} />
                                             </div>
                                         </div>
                                     </div>
