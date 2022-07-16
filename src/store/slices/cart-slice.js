@@ -40,16 +40,22 @@ const cartSlice = createSlice({
             state.subtotalPrice = subtotalPrice
         },
         removeFromCart(state, action) {
-            debugger
             let newCartItems = state.cartItems.filter(cartItem => cartItem.id !== action.payload);
             let findItem = state.cartItems.find(cartItem => cartItem.id === action.payload);
             let totalPrice = findItem.quantity * findItem.price;
-            let subtotalPrice = findItem.discountPrice > 0 ? findItem.discountPrice * findItem.quantity : findItem.price * findItem.quantity;
-            console.log(findItem)
+            let subtotalPrice = 0
+            if(findItem.discountPrice){
+                subtotalPrice = findItem.discountPrice * findItem.quantity;
+            }
+            else{
+                subtotalPrice = findItem.price * findItem.quantity;
+            }
             state.cartItems = newCartItems;
             state.totalPrice -= totalPrice
             state.subtotalPrice -= subtotalPrice
             state.totalQuantity--;
+            console.log(subtotalPrice)
+            console.log(state.subtotalPrice)
         }
     }
 })

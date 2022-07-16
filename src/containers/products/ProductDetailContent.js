@@ -80,8 +80,8 @@ const ProductDetailContent = ({ children, product, id }) => {
 
   useEffect(() => {
     setDiscount(product?.price, product?.discount)
-  })
-  
+  }, [product,id])
+
   return (
     <div className="content-wraper">
       <div className="container">

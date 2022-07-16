@@ -8,7 +8,7 @@ export function useDiscountHandler() {
             let isDiscount = discountVal > 0;
             if (isDiscount) {
                 let discountedPrice = getDicountValue(price, discountVal)
-                setDiscountValues({ isDiscount: true, discountValue: discountVal, discountedPrice: discountedPrice });
+                setDiscountValues({ isDiscount: true, discountValue: discountVal, discountedPrice: Number(discountedPrice) });
             }
         },
         [],

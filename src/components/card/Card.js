@@ -62,10 +62,10 @@ const Card = ({ data, type = 'normal' }) => {
                             </div>
                             <h4><Link className="product_name" to={`/product/${data?.id}`}>{data?.name}</Link></h4>
                             <div className="price-box">
-                                <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice.toFixed(2) : data?.price.toFixed(2)}</span>
+                                <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice : data?.price}</span>
                                 {discount.isDiscount &&
                                     <>
-                                        <span className="old-price">${data?.price.toFixed(2)}</span>
+                                        <span className="old-price">${data?.price}</span>
                                         <span className="discount-percentage">-{discount.discountValue}%</span>
                                     </>
                                 }
@@ -110,10 +110,10 @@ const Card = ({ data, type = 'normal' }) => {
                                 </div>
                                 <h4><Link className="product_name" to={`/product/${data?.id}`}>{data?.name}</Link></h4>
                                 <div className="price-box">
-                                    <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice.toFixed(2) : data?.price.toFixed(2)}</span>
+                                    <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice : data?.price}</span>
                                     {discount.isDiscount &&
                                         <>
-                                            <span className="old-price">${data?.price.toFixed(2)}</span>
+                                            <span className="old-price">${data?.price}</span>
                                             <span className="discount-percentage">-{discount.discountValue}%</span>
                                         </>
                                     }
