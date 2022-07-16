@@ -12,11 +12,10 @@ function Navbar() {
                                 <ul>
                                     <li><NavLink to="/" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Home</NavLink></li>
                                     <li><NavLink to="/products" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Shop</NavLink></li>
-                                    <li><NavLink to="/blog" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Blog</NavLink></li>
-                                    <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active-nav' : undefined}>About</NavLink></li>
-                                    <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Contact</NavLink></li>
                                     <li><NavLink to="/products/categories/1" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Smartwatch</NavLink></li>
                                     <li><NavLink to="/products/categories/5" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Accessories</NavLink></li>
+                                    <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active-nav' : undefined}>About</NavLink></li>
+                                    <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Contact</NavLink></li>
                                 </ul>
                             </nav>
                         </div>
