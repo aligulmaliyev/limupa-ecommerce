@@ -15,8 +15,8 @@ function Navbar() {
                                     <li><NavLink to="/blog" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Blog</NavLink></li>
                                     <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active-nav' : undefined}>About</NavLink></li>
                                     <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Contact</NavLink></li>
-                                    <li><NavLink to="/product/smartwatch" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Smartwatch</NavLink></li>
-                                    <li><NavLink to="/product/accessories" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Accessories</NavLink></li>
+                                    <li><NavLink to="/products/categories/1" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Smartwatch</NavLink></li>
+                                    <li><NavLink to="/products/categories/5" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Accessories</NavLink></li>
                                 </ul>
                             </nav>
                         </div>
