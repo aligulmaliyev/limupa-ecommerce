@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Modal from '../modal/Modal';
 import { cartActions } from '../../store/slices/cart-slice';
 import { getDicountValue } from '../../utils/getDiscountValue';
+import ProductDetailContent from '../../containers/products/ProductDetailContent';
 
 const Card = ({ data, type = 'normal' }) => {
     const [isVisibleModal, setIsVisibleModal] = useState(false);
@@ -49,7 +50,7 @@ const Card = ({ data, type = 'normal' }) => {
                 <div className="single-product-wrap">
                     <div className="product-image">
                         <Link to={`/product/${data?.id}`}>
-                            <img src={`assets/images/product/large-size/${data?.images[Math.floor(Math.random() * 5)]}`} alt="Li's Product" />
+                            <img src={process.env.PUBLIC_URL + `/assets/images/product/large-size/${data?.images[Math.floor(Math.random() * 5)]}`} alt="Li's Product" />
                         </Link>
                         {data?.new && <span className="sticker">New</span>}
                     </div>
@@ -71,10 +72,10 @@ const Card = ({ data, type = 'normal' }) => {
                             </div>
                             <h4><Link className="product_name" to={`/product/${data?.id}`}>{data?.name}</Link></h4>
                             <div className="price-box">
-                                <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice : data?.price}</span>
+                                <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice.toFixed(2) : data?.price.toFixed(2)}</span>
                                 {discount.isDiscount &&
                                     <>
-                                        <span className="old-price">${data?.price}</span>
+                                        <span className="old-price">${data?.price.toFixed(2)}</span>
                                         <span className="discount-percentage">-{discount.discountValue}%</span>
                                     </>
                                 }
@@ -94,9 +95,9 @@ const Card = ({ data, type = 'normal' }) => {
                 type === 'list' && <div class="row product-layout-list">
                     <div class="col-lg-3 col-md-5 ">
                         <div class="product-image">
-                            <a href="single-product.html">
-                                <img src={`assets/images/product/large-size/${data?.images[Math.floor(Math.random() * 5)]}`} alt="Li's Product" />
-                            </a>
+                            <Link to={`/product/${data.id}`}>
+                                <img src={process.env.PUBLIC_URL + `/assets/images/product/large-size/${data?.images[Math.floor(Math.random() * 5)]}`} alt="Li's Product" />
+                            </Link>
                             <span class="sticker">New</span>
                         </div>
                     </div>
@@ -137,7 +138,9 @@ const Card = ({ data, type = 'normal' }) => {
 
                 </div>
             }
-            <Modal id={data?.id} isVisible={isVisibleModal} close={handleModal} />
+            <Modal isVisible={isVisibleModal} close={handleModal} >
+                <ProductDetailContent id={data?.id} />
+            </Modal>
         </>
     )
 }
