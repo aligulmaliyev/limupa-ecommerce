@@ -1,19 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Modal from '../components/modal/Modal'
 import Card from '../components/card/Card';
 import ProductDetailContent from '../containers/products/ProductDetailContent'
 import ProductFeedback from '../containers/products/ProductFeedback';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 const ProductsDetail = () => {
+    const params = useParams()
+    const id = Number(params.id)
+    const location = useLocation()
     const products = useSelector(state => state.products.allProducts);
+    const [tab, setTab] = useState(1);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
-    const handleModal = () => {
-        setIsVisibleModal(prev => !prev);
-    }
+    const [product, setProduct] = useState({});
+
+    const handleModal = () => setIsVisibleModal(prev => !prev);
+    const handleTab = (number) => setTab(number)
+
+    useEffect(() => {
+        let existingProduct = products?.find(product => product.id === id);
+        setProduct(existingProduct)
+    }, [products, id])
     return (
         <>
-            <ProductDetailContent>
+            <ProductDetailContent product={product} id={id}>
                 <div className="block-reassurance">
                     <ul>
                         <li>
@@ -49,20 +60,20 @@ const ProductsDetail = () => {
                         <div className="col-lg-12">
                             <div className="li-product-tab">
                                 <ul className="nav li-product-menu">
-                                    <li><a className="active" data-toggle="tab" href="#description"><span>Description</span></a></li>
-                                    <li><a data-toggle="tab" href="#product-details"><span>Product Details</span></a></li>
-                                    <li><a data-toggle="tab" href="#reviews"><span>Reviews</span></a></li>
+                                    <li><Link onClick={handleTab} to={location.pathname} className={tab === 1 ? "active" : undefined}><span>Description</span></Link></li>
+                                    <li><Link onClick={handleTab} to={location.pathname} className={tab === 2 ? "active" : undefined}><span>Product Details</span></Link></li>
+                                    <li><Link onClick={handleTab} to={location.pathname} className={tab === 3 ? "active" : undefined}><span>Reviews</span></Link></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className="tab-content">
-                        <div id="description" className="tab-pane active show" role="tabpanel">
+                        <div id="description" className={tab === 1 ? "active" : undefined}>
                             <div className="product-description">
                                 <span>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</span>
                             </div>
                         </div>
-                        <div id="product-details" className="tab-pane" role="tabpanel">
+                        <div id="product-details" className={tab === 2 ? "active" : undefined}>
                             <div className="product-details-manufacturer">
                                 <a href="#">
                                     <img src="images/product-details/1.jpg" alt="Product Manufacturer Image" />
@@ -71,7 +82,7 @@ const ProductsDetail = () => {
                                 <p><span>Reference</span> demo_7</p>
                             </div>
                         </div>
-                        <div id="reviews" className="tab-pane" role="tabpanel">
+                        <div id="reviews" className={tab === 3 ? "active" : undefined}>
                             <div className="product-reviews">
                                 <div className="product-details-comment-block">
                                     <div className="comment-review">

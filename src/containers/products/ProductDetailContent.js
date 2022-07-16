@@ -5,21 +5,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { cartActions } from '../../store/slices/cart-slice';
 import { getDicountValue } from '../../utils/getDiscountValue';
 
-const ProductDetailContent = ({ children, id }) => {
+const ProductDetailContent = ({ children,product, id }) => {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products.allProducts);
   const cartItems = useSelector(state => state.cart.cartItems);
   const location = useLocation()
-  const params = useParams()
   const [imgSrc, setImgSrc] = useState('1.jpg');
   const [images, setImages] = useState([]);
-  const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [dimension, setDimension] = useState([]);
   const [selectedDimension, setSelectedDimension] = useState(0);
   const [addedCart, setAddedCart] = useState({});
-
-  const _id = id || Number(params.id);
 
   const handleChangeImgSrc = (src) => {
     setImgSrc(src);
@@ -67,20 +62,18 @@ const ProductDetailContent = ({ children, id }) => {
   }, [product, imgSrc, selectedDimension, quantity, dispatch])
 
   useEffect(() => {
-    let existingProduct = products?.find(product => product.id === _id);
-    setDimension(existingProduct?.dimension)
-    setImages(existingProduct?.images)
-    setProduct(existingProduct)
-  }, [products, _id])
+    setDimension(product?.dimension)
+    setImages(product?.images)
+  }, [product, id])
 
   useEffect(() => {
-    let addedCart = cartItems?.find(cartItem => cartItem.id === _id);
+    let addedCart = cartItems?.find(cartItem => cartItem.id === id);
     if (addedCart) {
       setImgSrc(addedCart.image);
       setQuantity(addedCart.quantity)
       setAddedCart(addedCart)
     }
-  }, [cartItems, products, _id])
+  }, [cartItems, product, id])
 
   return (
     <div className="content-wraper">

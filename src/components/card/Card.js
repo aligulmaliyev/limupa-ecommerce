@@ -139,7 +139,7 @@ const Card = ({ data, type = 'normal' }) => {
                 </div>
             }
             <Modal isVisible={isVisibleModal} close={handleModal} >
-                <ProductDetailContent id={data?.id} />
+                <ProductDetailContent id={data?.id} product={data} />
             </Modal>
         </>
     )
