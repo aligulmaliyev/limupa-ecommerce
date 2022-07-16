@@ -2,19 +2,27 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/slices/cart-slice';
+import { useDiscountHandler } from '../../hooks/useDiscountHandler';
 
 const CartItem = ({ data }) => {
     const dispatch = useDispatch()
     const cartItems = useSelector(state => state.cart.cartItems);
     const [quantity, setQuantity] = useState(1);
+    const [discount, setDiscount] = useDiscountHandler();
+
     const addToCart = useCallback(() => {
         dispatch(cartActions.addToCart({
             id: data?.id,
             quantity,
             price: data?.price,
-            totalPrice: quantity * data?.price
+            totalPrice: quantity * data?.price,
+            discountPrice: discount.discountedPrice,
         }))
     }, [quantity, dispatch])
+
+    const removeFromCart = (id) => {
+        dispatch(cartActions.removeFromCart(id));
+    }
 
     const changeQuantity = (type) => {
 
@@ -49,10 +57,13 @@ const CartItem = ({ data }) => {
             setQuantity(addedCart.quantity)
         }
     }, [cartItems])
+    useEffect(() => {
+        setDiscount(data?.price, data?.discount);
+    }, [data]);
 
     return (
         <tr key={data.id}>
-            <td className="li-product-remove"><span><i className="fa fa-times"></i></span></td>
+            <td className="li-product-remove" onClick={() => removeFromCart(data.id)}><span><i className="fa fa-times"></i></span></td>
             <td className="li-product-thumbnail"><Link to={`/product/${data.id}`}><img src={`assets/images/product/small-size/${data.image}`} alt="Li's Product" /></Link></td>
             <td className="li-product-name"><Link to={`/product/${data.id}`}>{data.name}</Link></td>
             <td className="li-product-price"><span className="amount">${data.price}</span></td>

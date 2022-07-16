@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { cartActions } from '../../store/slices/cart-slice';
 import { getDicountValue } from '../../utils/getDiscountValue';
+import { useDiscountHandler } from '../../hooks/useDiscountHandler';
 
 const ProductDetailContent = ({ children, product, id }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.cartItems);
   const location = useLocation()
+  const [discount, setDiscount] = useDiscountHandler();
   const [imgSrc, setImgSrc] = useState('1.jpg');
   const [images, setImages] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -57,7 +59,8 @@ const ProductDetailContent = ({ children, product, id }) => {
       dimension: selectedDimension,
       price: product?.price,
       quantity: quantity,
-      totalPrice: quantity * product?.price
+      totalPrice: quantity * product?.price,
+      discountPrice: discount.discountedPrice,
     }))
   }, [product, imgSrc, selectedDimension, quantity, dispatch])
 
@@ -75,6 +78,10 @@ const ProductDetailContent = ({ children, product, id }) => {
     }
   }, [cartItems, product, id])
 
+  useEffect(() => {
+    setDiscount(product?.price, product?.discount)
+  })
+  
   return (
     <div className="content-wraper">
       <div className="container">

@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ButtonLink from '../../components/form-elements/buttons/ButtonLink';
+import { cartActions } from '../../store/slices/cart-slice';
 
 const MiniCart = () => {
     const cart = useSelector(state => state.cart);
+    const dispatch =useDispatch()
     const [showMinicart, setShowMinicart] = useState(false)
     const handleMinicart = () => {
         setShowMinicart(perv => !perv)
+    }
+    const removeFromCart=(id)=>{
+        dispatch(cartActions.removeFromCart(id));
     }
     return (
         <li className="hm-minicart">
@@ -22,7 +27,7 @@ const MiniCart = () => {
                 <ul className="minicart-product-list">
                     {
                         cart.cartItems?.slice(0, 3).map(cartItem => (
-                            <MiniCartItem key={cartItem.id} data={cartItem} />
+                            <MiniCartItem removeFromCart={removeFromCart} key={cartItem.id} data={cartItem} />
                         ))
                     }
                     {
@@ -39,7 +44,7 @@ const MiniCart = () => {
     )
 }
 
-const MiniCartItem = ({ data }) => {
+const MiniCartItem = ({ data,removeFromCart }) => {
     return (
         <li>
             <Link to={`/product/${data?.id}`} className="minicart-product-image">
@@ -49,7 +54,7 @@ const MiniCartItem = ({ data }) => {
                 <h6><Link to={`/product/${data?.id}`}>{data?.name}</Link></h6>
                 <span>${data?.totalPrice} x {data?.quantity}</span>
             </div>
-            <button className="close" title="Remove">
+            <button onClick={()=>removeFromCart(data.id)} className="close" title="Remove">
                 <i className="fa fa-close"></i>
             </button>
         </li>

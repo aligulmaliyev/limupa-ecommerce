@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 import Modal from '../modal/Modal';
 import { cartActions } from '../../store/slices/cart-slice';
-import { getDicountValue } from '../../utils/getDiscountValue';
+import { useDiscountHandler } from '../../hooks/useDiscountHandler';
 import ProductDetailContent from '../../containers/products/ProductDetailContent';
 
 const Card = ({ data, type = 'normal' }) => {
     const [isVisibleModal, setIsVisibleModal] = useState(false);
-    const [discount, setDiscount] = useState({ isDiscount: false, discountValue: 0, discountedPrice: 0 });
-
+    const [discount, setDiscount] = useDiscountHandler();
     const dispatch = useDispatch()
+    
     const handleModal = () => {
         setIsVisibleModal(prev => !prev);
     }
@@ -26,21 +26,11 @@ const Card = ({ data, type = 'normal' }) => {
             quantity: 1,
             totalPrice: data?.price
         }))
-    }, [data, discount, dispatch])
+    }, [data, dispatch])
 
-    const getDiscount = useCallback(
-        () => {
-            let isDiscount = data?.discount > 0;
-            if (isDiscount) {
-                let discountedPrice = getDicountValue(data?.price, discount.discountValue)
-                setDiscount({ isDiscount: true, discountValue: data?.discount, discountedPrice: discountedPrice });
-            }
-        },
-        [data, discount],
-    )
 
     useEffect(() => {
-        getDiscount()
+        setDiscount(data?.price,data?.discount);
     }, [data]);
 
     return (
@@ -92,33 +82,33 @@ const Card = ({ data, type = 'normal' }) => {
                 </div>
             }
             {
-                type === 'list' && <div class="row product-layout-list">
-                    <div class="col-lg-3 col-md-5 ">
-                        <div class="product-image">
+                type === 'list' && <div className="row product-layout-list">
+                    <div className="col-lg-3 col-md-5 ">
+                        <div className="product-image">
                             <Link to={`/product/${data.id}`}>
                                 <img src={process.env.PUBLIC_URL + `/assets/images/product/large-size/${data?.images[Math.floor(Math.random() * 5)]}`} alt="Li's Product" />
                             </Link>
-                            <span class="sticker">New</span>
+                            <span className="sticker">New</span>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-7">
-                        <div class="product_desc">
-                            <div class="product_desc_info">
-                                <div class="product-review">
-                                    <h5 class="manufacturer">
+                    <div className="col-lg-5 col-md-7">
+                        <div className="product_desc">
+                            <div className="product_desc_info">
+                                <div className="product-review">
+                                    <h5 className="manufacturer">
                                         <Link to={`/products/category/${data?.categoryId}`}>{data?.categoryName}</Link>
                                     </h5>
-                                    <div class="rating-box">
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                            <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                    <div className="rating-box">
+                                        <ul className="rating">
+                                            <li><i className="fa fa-star-o"></i></li>
+                                            <li><i className="fa fa-star-o"></i></li>
+                                            <li><i className="fa fa-star-o"></i></li>
+                                            <li className="no-star"><i className="fa fa-star-o"></i></li>
+                                            <li className="no-star"><i className="fa fa-star-o"></i></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <h4><Link class="product_name" to={`/product/${data?.id}`}>{data?.name}</Link></h4>
+                                <h4><Link className="product_name" to={`/product/${data?.id}`}>{data?.name}</Link></h4>
                                 <div className="price-box">
                                     <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice.toFixed(2) : data?.price.toFixed(2)}</span>
                                     {discount.isDiscount &&
@@ -132,12 +122,12 @@ const Card = ({ data, type = 'normal' }) => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="shop-add-action mb-xs-30">
-                            <ul class="add-actions-link  flex-product">
-                                <li onClick={addToCart} class="add-cart"><span>Add to cart</span></li>
-                                <li class="wishlist"><Link to="/wishlist"><i class="fa fa-heart-o"></i>Add to wishlist</Link></li>
-                                <li onClick={handleModal}><span class="quick-view"><i class="fa fa-eye"></i>Quick view</span></li>
+                    <div className="col-lg-4">
+                        <div className="shop-add-action mb-xs-30">
+                            <ul className="add-actions-link  flex-product">
+                                <li onClick={addToCart} className="add-cart"><span>Add to cart</span></li>
+                                <li className="wishlist"><Link to="/wishlist"><i className="fa fa-heart-o"></i>Add to wishlist</Link></li>
+                                <li onClick={handleModal}><span className="quick-view"><i className="fa fa-eye"></i>Quick view</span></li>
                             </ul>
                         </div>
                     </div>
