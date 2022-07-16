@@ -20,7 +20,7 @@ const Banner = () => {
                                             <h2>Chamcham Galaxy S9 | S9+</h2>
                                             <h3>Starting at <span>$1209.00</span></h3>
                                             <div className="default-btn slide-btn">
-                                                <a className="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                                <Link to='/products' className="links" href="shop-left-sidebar.html">Shopping Now</Link>
                                             </div>
                                         </div>
                                     </div></SwiperSlide>
@@ -31,7 +31,7 @@ const Banner = () => {
                                             <h2>Work Desk Surface Studio 2018</h2>
                                             <h3>Starting at <span>$824.00</span></h3>
                                             <div className="default-btn slide-btn">
-                                                <a className="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                                <Link to='/products' className="links" href="shop-left-sidebar.html">Shopping Now</Link>
                                             </div>
                                         </div>
                                     </div></SwiperSlide>
@@ -42,7 +42,7 @@ const Banner = () => {
                                             <h2>Phantom 4 Pro+ Obsidian</h2>
                                             <h3>Starting at <span>$1849.00</span></h3>
                                             <div className="default-btn slide-btn">
-                                                <a className="links" href="shop-left-sidebar.html">Shopping Now</a>
+                                                <Link to='/products' className="links" href="shop-left-sidebar.html">Shopping Now</Link>
                                             </div>
                                         </div>
                                     </div></SwiperSlide>
@@ -53,12 +53,12 @@ const Banner = () => {
                     </div>
                     <div className="col-lg-4 col-md-4 text-center pt-xs-30">
                         <div className="li-banner">
-                            <Link to='/product'>
+                            <Link to='/products'>
                                 <img src={process.env.PUBLIC_URL + `/assets/images/banner/1_1.jpg`} alt="" />
                             </Link>
                         </div>
                         <div className="li-banner mt-15 mt-sm-30 mt-xs-30">
-                            <Link to='/product'>
+                            <Link to='/products'>
                                 <img src={process.env.PUBLIC_URL + `/assets/images/banner/1_2.jpg`} alt="" />
                             </Link>
                         </div>

@@ -142,7 +142,7 @@ const Footer = () => {
                                 </div>
                                 <div className="footer-newsletter">
                                     <h4>Sign up to newsletter</h4>
-                                    <form action="#" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="footer-subscribe-form validate" target="_blank" noValidate>
+                                    <form className="footer-subscribe-form validate" target="_blank" noValidate>
                                         <div id="mc_embed_signup_scroll">
                                             <div id="mc-form" className="mc-form subscribe-form form-group" >
                                                 <input id="mc-email" type="email" autoComplete="off" placeholder="Enter your email" />
@@ -185,7 +185,7 @@ const Footer = () => {
                             </div>
                             <div className="copyright text-center">
                                 <Link to='/'>
-                                    <img src={process.env.PUBLIC_URL + `/assets/images/payment/1.png"`}alt="" />
+                                    <img src={process.env.PUBLIC_URL + `/assets/images/payment/1.png"`} alt="" />
                                 </Link>
                             </div>
                             <div className="copyright text-center pt-25">

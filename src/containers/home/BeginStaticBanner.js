@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const BeginStaticBanner = () => {
     return (
@@ -16,7 +17,7 @@ const BeginStaticBanner = () => {
                                 <span> $1209.00</span>
                             </p>
                             <div className="default-btn">
-                                <a href="shop-left-sidebar.html" className="links">Shopping Now</a>
+                                <Link to="/products" className="links">Shopping Now</Link>
                             </div>
                         </div>
                     </div>

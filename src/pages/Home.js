@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Modal from '../components/modal/Modal'
 import Banner from '../containers/home/Banner'
 import BeginStaticBanner from '../containers/home/BeginStaticBanner'
 import ProductsContainer from '../containers/home/ProductsContainer'
@@ -41,7 +40,6 @@ const Home = () => {
       <BeginStaticBanner />
       <ProductsContainer title="Trendding Products" data={products} categories={CATEGORIES} filterKey={1} />
       <ProductsContainer title="Bestsellers" data={products} categories={CATEGORIES} filterKey={1} />
-      <Modal />
     </>
   )
 }
