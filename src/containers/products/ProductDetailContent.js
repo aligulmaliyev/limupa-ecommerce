@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { cartActions } from '../../store/slices/cart-slice';
 import { getDicountValue } from '../../utils/getDiscountValue';
 
-const ProductDetailContent = ({ children,product, id }) => {
+const ProductDetailContent = ({ children, product, id }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.cartItems);
   const location = useLocation()

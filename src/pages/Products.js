@@ -36,7 +36,7 @@ const Products = () => {
                         <div className="col-lg-9 order-1 order-lg-2">
                             <div className="single-banner shop-page-banner">
                                 <a href="#">
-                                    <img src="assets/images/bg-banner/2.jpg" alt="Li's Static Banner" />
+                                    <img src={process.env.PUBLIC_URL + `/assets/images/bg-banner/2.jpg`} alt="Li's Static Banner" />
                                 </a>
                             </div>
                             <div className="shop-top-bar mt-30">

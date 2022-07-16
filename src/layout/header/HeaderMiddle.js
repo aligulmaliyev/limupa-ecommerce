@@ -14,7 +14,7 @@ const HeaderMiddle = () => {
                     <div className="col-lg-3">
                         <div className="logo pb-sm-30 pb-xs-30">
                             <Link to='/'>
-                                <img src="assets/images/menu/logo/1.jpg" alt="" />
+                                <img src={process.env.PUBLIC_URL + `/assets/images/menu/logo/1.jpg`} alt="" />
                             </Link>
                         </div>
                     </div>

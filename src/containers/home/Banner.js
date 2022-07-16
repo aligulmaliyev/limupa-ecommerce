@@ -54,12 +54,12 @@ const Banner = () => {
                     <div className="col-lg-4 col-md-4 text-center pt-xs-30">
                         <div className="li-banner">
                             <Link to='/product'>
-                                <img src="assets/images/banner/1_1.jpg" alt="" />
+                                <img src={process.env.PUBLIC_URL + `/assets/images/banner/1_1.jpg`} alt="" />
                             </Link>
                         </div>
                         <div className="li-banner mt-15 mt-sm-30 mt-xs-30">
                             <Link to='/product'>
-                                <img src="assets/images/banner/1_2.jpg" alt="" />
+                                <img src={process.env.PUBLIC_URL + `/assets/images/banner/1_2.jpg`} alt="" />
                             </Link>
                         </div>
                     </div>

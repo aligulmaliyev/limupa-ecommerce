@@ -1,17 +1,19 @@
 import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
-const ProductFeedback = () => {
+const ProductFeedback = ({ product }) => {
+    const location = useLocation();
     return (
         <div className="modal-body">
             <h3 className="review-page-title">Write Your Review</h3>
             <div className="modal-inner-area row">
                 <div className="col-lg-6">
                     <div className="li-review-product">
-                        <img src="images/product/large-size/3.jpg" alt="Li's Product" />
+                        <img src={process.env.PUBLIC_URL + `/assets/images/product/large-size/${product?.images[0]}`} alt="Li's Product" />
                         <div className="li-review-product-desc">
-                            <p className="li-product-name">Today is a good day Framed poster</p>
+                            <p className="li-product-name">{product?.name}</p>
                             <p>
-                                <span>Beach Camera Exclusive Bundle - Includes Two Samsung Radiant 360 R3 Wi-Fi Bluetooth Speakers. Fill The Entire Room With Exquisite Sound via Ring Radiator Technology. Stream And Control R3 Speakers Wirelessly With Your Smartphone. Sophisticated, Modern Design </span>
+                                <span>{product?.description}</span>
                             </p>
                         </div>
                     </div>
@@ -51,8 +53,8 @@ const ProductFeedback = () => {
                                             <span className="required"><sub>*</sub> Required fields</span>
                                         </p>
                                         <div className="feedback-btn pb-15">
-                                            <a href="#" className="close" data-dismiss="modal" aria-label="Close">Close</a>
-                                            <a href="#">Submit</a>
+                                            <Link to={location.pathname} className="close" data-dismiss="modal" aria-label="Close">Close</Link>
+                                            <Link to={location.pathname}>Submit</Link>
                                         </div>
                                     </div>
                                 </form>

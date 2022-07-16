@@ -48,8 +48,8 @@ const HeaderTop = () => {
                                     {
                                         showLanguage && <div className="language ht-language">
                                             <ul className="ht-setting-list">
-                                                <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} ><img src="assets/images/menu/flag-icon/1.jpg" alt="" />English</NavLink></li>
-                                                <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} ><img src="assets/images/menu/flag-icon/2.jpg" alt="" />Français</NavLink></li>
+                                                <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} ><img src={process.env.PUBLIC_URL + `/assets/images/menu/flag-icon/1.jpg`} alt="" />English</NavLink></li>
+                                                <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} ><img src={process.env.PUBLIC_URL + `/assets/images/menu/flag-icon/2.jpg`} alt="" />Français</NavLink></li>
                                             </ul>
                                         </div>
                                     }

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../components/modal/Modal'
 import Card from '../components/card/Card';
 import ProductDetailContent from '../containers/products/ProductDetailContent'
 import ProductFeedback from '../containers/products/ProductFeedback';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { fetchProducts } from '../store/actions/product-actions'
 
 const ProductsDetail = () => {
+    const dispatch = useDispatch();
     const params = useParams()
-    const id = Number(params.id)
     const location = useLocation()
     const products = useSelector(state => state.products.allProducts);
     const [tab, setTab] = useState(1);
@@ -17,11 +18,17 @@ const ProductsDetail = () => {
 
     const handleModal = () => setIsVisibleModal(prev => !prev);
     const handleTab = (number) => setTab(number)
+    const id = Number(params.id)
 
     useEffect(() => {
         let existingProduct = products?.find(product => product.id === id);
         setProduct(existingProduct)
     }, [products, id])
+
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [id])
+
     return (
         <>
             <ProductDetailContent product={product} id={id}>
@@ -60,64 +67,67 @@ const ProductsDetail = () => {
                         <div className="col-lg-12">
                             <div className="li-product-tab">
                                 <ul className="nav li-product-menu">
-                                    <li><Link onClick={handleTab} to={location.pathname} className={tab === 1 ? "active" : undefined}><span>Description</span></Link></li>
-                                    <li><Link onClick={handleTab} to={location.pathname} className={tab === 2 ? "active" : undefined}><span>Product Details</span></Link></li>
-                                    <li><Link onClick={handleTab} to={location.pathname} className={tab === 3 ? "active" : undefined}><span>Reviews</span></Link></li>
+                                    <li><Link onClick={() => handleTab(1)} to={location.pathname} className={tab === 1 ? "active" : undefined}><span>Description</span></Link></li>
+                                    <li><Link onClick={() => handleTab(2)} to={location.pathname} className={tab === 2 ? "active" : undefined}><span>Product Details</span></Link></li>
+                                    <li><Link onClick={() => handleTab(3)} to={location.pathname} className={tab === 3 ? "active" : undefined}><span>Reviews</span></Link></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className="tab-content">
-                        <div id="description" className={tab === 1 ? "active" : undefined}>
-                            <div className="product-description">
-                                <span>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</span>
+                        {
+                            tab === 1 &&
+                            <div>
+                                <div className="product-description">
+                                    <span>{product?.description}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div id="product-details" className={tab === 2 ? "active" : undefined}>
-                            <div className="product-details-manufacturer">
-                                <a href="#">
-                                    <img src="images/product-details/1.jpg" alt="Product Manufacturer Image" />
-                                </a>
-                                <p><span>Reference</span> demo_7</p>
-                                <p><span>Reference</span> demo_7</p>
+                        }
+                        {
+                            tab === 2 &&
+                            <div>
+                                <div className="product-details-manufacturer">
+                                    <a href="#">
+                                        <img src={process.env.PUBLIC_URL + `/assets/images/product-details/1.jpg`} alt="Product Manufacturer Image" />
+                                    </a>
+                                    <p><span>Reference</span> demo_7</p>
+                                    <p><span>Reference</span> demo_7</p>
+                                </div>
                             </div>
-                        </div>
-                        <div id="reviews" className={tab === 3 ? "active" : undefined}>
-                            <div className="product-reviews">
-                                <div className="product-details-comment-block">
-                                    <div className="comment-review">
-                                        <span>Grade</span>
-                                        <ul className="rating">
-                                            <li><i className="fa fa-star-o"></i></li>
-                                            <li><i className="fa fa-star-o"></i></li>
-                                            <li><i className="fa fa-star-o"></i></li>
-                                            <li className="no-star"><i className="fa fa-star-o"></i></li>
-                                            <li className="no-star"><i className="fa fa-star-o"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div className="comment-author-infos pt-25">
-                                        <span>HTML 5</span>
-                                        <em>01-12-18</em>
-                                    </div>
-                                    <div className="comment-details">
-                                        <h4 className="title-block">Demo</h4>
-                                        <p>Plaza</p>
-                                    </div>
-                                    <div className="review-btn">
-                                        <a className="review-links" href="#" onClick={handleModal}>Write Your Review!</a>
-                                    </div>
-                                    <div className="modal fade modal-wrapper" id="mymodal" >
-                                        <div className="modal-dialog modal-dialog-centered" role="document">
-                                            <div className="modal-content">
-                                                <Modal isVisible={isVisibleModal} close={(handleModal)}>
-                                                    <ProductFeedback />
-                                                </Modal>
-                                            </div>
+                        }
+                        {
+                            tab === 3 &&
+                            <div >
+                                <div className="product-reviews">
+                                    <div className="product-details-comment-block">
+                                        <div className="comment-review">
+                                            <span>Grade</span>
+                                            <ul className="rating">
+                                                <li><i className="fa fa-star-o"></i></li>
+                                                <li><i className="fa fa-star-o"></i></li>
+                                                <li><i className="fa fa-star-o"></i></li>
+                                                <li className="no-star"><i className="fa fa-star-o"></i></li>
+                                                <li className="no-star"><i className="fa fa-star-o"></i></li>
+                                            </ul>
                                         </div>
+                                        <div className="comment-author-infos pt-25">
+                                            <span>HTML 5</span>
+                                            <em>01-12-18</em>
+                                        </div>
+                                        <div className="comment-details">
+                                            <h4 className="title-block">Demo</h4>
+                                            <p>Plaza</p>
+                                        </div>
+                                        <div className="review-btn">
+                                            <Link to={location.pathname} className="review-links" onClick={handleModal}>Write Your Review!</Link>
+                                        </div>
+                                        <Modal isVisible={isVisibleModal} close={handleModal}>
+                                            <ProductFeedback product={product} />
+                                        </Modal>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -137,7 +147,6 @@ const ProductsDetail = () => {
                                             <Card data={product} type='normal' />
                                         </div>
                                     ))
-
                                 }
                             </div>
                         </div>
