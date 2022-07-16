@@ -119,8 +119,14 @@ const Card = ({ data, type = 'normal' }) => {
                                     </div>
                                 </div>
                                 <h4><Link class="product_name" to={`/product/${data?.id}`}>{data?.name}</Link></h4>
-                                <div class="price-box">
-                                    <span class="new-price">$46.80</span>
+                                <div className="price-box">
+                                    <span className={discount.isDiscount ? "new-price new-price-2" : "new-price"}>${discount.isDiscount ? discount.discountedPrice.toFixed(2) : data?.price.toFixed(2)}</span>
+                                    {discount.isDiscount &&
+                                        <>
+                                            <span className="old-price">${data?.price.toFixed(2)}</span>
+                                            <span className="discount-percentage">-{discount.discountValue}%</span>
+                                        </>
+                                    }
                                 </div>
                                 <p>{data?.description}</p>
                             </div>
