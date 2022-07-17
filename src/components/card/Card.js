@@ -1,16 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import Modal from '../modal/Modal';
 import { cartActions } from '../../store/slices/cart-slice';
+import { wishlistActions } from '../../store/slices/wishlist-slice';
 import { useDiscountHandler } from '../../hooks/useDiscountHandler';
 import ProductDetailContent from '../../containers/products/ProductDetailContent';
 
 const Card = ({ data, type = 'normal' }) => {
+    const wishlist = useSelector(state => state.wishlist.wishlistItems);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
+    const [isAddedWishList, setAddedWishList] = useState(false);
     const [discount, setDiscount] = useDiscountHandler();
     const dispatch = useDispatch()
-    
+
     const handleModal = () => {
         setIsVisibleModal(prev => !prev);
     }
@@ -26,12 +29,30 @@ const Card = ({ data, type = 'normal' }) => {
             quantity: 1,
             totalPrice: data?.price
         }))
+    }, [data, discount, dispatch])
+
+    const toggleWishList = useCallback(() => {
+        dispatch(wishlistActions.wishListToggler({
+            id: data?.id,
+            name: data?.name,
+            image: data?.images[0],
+            dimension: data?.dimension[0],
+            price: data?.price,
+            discountPrice: discount.discountedPrice,
+            quantity: 1,
+            totalPrice: data?.price,
+            stockStatus: true,
+        }))
     }, [data,discount, dispatch])
 
+    useEffect(() => {
+        setDiscount(data?.price, data?.discount);
+    }, [data]);
 
     useEffect(() => {
-        setDiscount(data?.price,data?.discount);
-    }, [data]);
+        let addedWishList = wishlist.some(item => item.id === data?.id)
+        setAddedWishList(addedWishList)
+    }, [wishlist]);
 
     return (
         <>
@@ -74,7 +95,11 @@ const Card = ({ data, type = 'normal' }) => {
                         <div className="add-actions">
                             <ul className="add-actions-link">
                                 <li onClick={addToCart} className="add-cart active"><span> Add to cart</span></li>
-                                <li><span><i className="fa fa-heart-o"></i></span></li>
+                                <li onClick={toggleWishList}><span>
+                                    {isAddedWishList ?
+                                        <i style={{ color: 'red' }} className="fa fa-heart"></i> :
+                                        <i className="fa fa-heart-o"></i>}
+                                </span></li>
                                 <li><span onClick={handleModal}><i className="fa fa-eye"></i></span></li>
                             </ul>
                         </div>

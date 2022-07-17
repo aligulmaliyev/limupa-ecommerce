@@ -1,9 +1,11 @@
 import React from 'react'
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import MiniCart from '../../containers/cart/MiniCart';
 import SearchBox from '../../components/form-elements/search-box/SearchBox';
 
 const HeaderMiddle = () => {
+    const wishlist = useSelector(state => state.wishlist);
     const handleSearch = (e) => {
 
     }
@@ -24,7 +26,7 @@ const HeaderMiddle = () => {
                             <ul className="hm-menu">
                                 <li className="hm-wishlist">
                                     <Link to='/wishlist'>
-                                        <span className="cart-item-count wishlist-item-count">0</span>
+                                        <span className="cart-item-count wishlist-item-count">{wishlist.totalQuantity}</span>
                                         <i className="fa fa-heart-o"></i>
                                     </Link>
                                 </li>

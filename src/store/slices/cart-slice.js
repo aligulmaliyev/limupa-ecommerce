@@ -54,8 +54,6 @@ const cartSlice = createSlice({
             state.totalPrice -= totalPrice
             state.subtotalPrice -= subtotalPrice
             state.totalQuantity--;
-            console.log(subtotalPrice)
-            console.log(state.subtotalPrice)
         }
     }
 })
