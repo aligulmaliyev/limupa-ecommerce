@@ -7,7 +7,7 @@ export const fetchProducts = (filters) => {
 
     return async (dispatch) => {
         const fetchHandler = async () => {
-            const res = await fetch(API + `/products/?${query}`);
+            const res = await fetch(API + `/get-products/?${query}`);
             const data = await res.json();
             return data
         }

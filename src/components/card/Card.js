@@ -41,9 +41,9 @@ const Card = ({ data, type = 'normal' }) => {
             discountPrice: discount.discountedPrice,
             quantity: 1,
             totalPrice: data?.price,
-            stockStatus: true,
+            stockStatus: data.stock > 0,
         }))
-    }, [data,discount, dispatch])
+    }, [data, discount, dispatch])
 
     useEffect(() => {
         setDiscount(data?.price, data?.discount);
