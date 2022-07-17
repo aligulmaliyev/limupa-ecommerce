@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Products from './pages/Products';
 import ProductsDetail from './pages/ProductsDetail';
+import WishList from './pages/WishList';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/products/categories/:categoryId' element={<Products />} />
           <Route path='/product/:id' element={<ProductsDetail />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/wishlist' element={<WishList />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='*' element={<NotFound />} />
