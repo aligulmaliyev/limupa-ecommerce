@@ -8,11 +8,12 @@ import NotFound from './pages/NotFound';
 import Products from './pages/Products';
 import ProductsDetail from './pages/ProductsDetail';
 import WishList from './pages/WishList';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
