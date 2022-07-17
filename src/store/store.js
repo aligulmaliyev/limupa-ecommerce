@@ -10,5 +10,9 @@ const store = configureStore({
         products: productsSlice.reducer,
     }
 });
+store.subscribe(() => {
+    localStorage.setItem('wishlist', JSON.stringify(store.getState().wishlist));
+    localStorage.setItem('cart', JSON.stringify(store.getState().cart))
+})
 
 export default store;

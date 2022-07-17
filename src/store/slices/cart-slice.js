@@ -11,6 +11,9 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        hydrate: (state, action) => {
+            return action.payload
+        },
         addToCart(state, action) {
             let newItem = action.payload;
             let existingItem = state.cartItems.find(item => item.id === newItem.id);
@@ -44,10 +47,10 @@ const cartSlice = createSlice({
             let findItem = state.cartItems.find(cartItem => cartItem.id === action.payload);
             let totalPrice = findItem.quantity * findItem.price;
             let subtotalPrice = 0
-            if(findItem.discountPrice){
+            if (findItem.discountPrice) {
                 subtotalPrice = findItem.discountPrice * findItem.quantity;
             }
-            else{
+            else {
                 subtotalPrice = findItem.price * findItem.quantity;
             }
             state.cartItems = newCartItems;
