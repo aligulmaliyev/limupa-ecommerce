@@ -26,7 +26,7 @@ const Card = ({ data, type = 'normal' }) => {
             quantity: 1,
             totalPrice: data?.price
         }))
-    }, [data, dispatch])
+    }, [data,discount, dispatch])
 
 
     useEffect(() => {

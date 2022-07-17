@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { cartActions } from '../../store/slices/cart-slice';
@@ -80,7 +80,7 @@ const ProductDetailContent = ({ children, product, id }) => {
 
   useEffect(() => {
     setDiscount(product?.price, product?.discount)
-  }, [product,id])
+  }, [product, id])
 
   return (
     <div className="content-wraper">

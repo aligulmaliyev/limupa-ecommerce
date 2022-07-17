@@ -87,9 +87,9 @@ const ProductsDetail = () => {
                             tab === 2 &&
                             <div>
                                 <div className="product-details-manufacturer">
-                                    <a href="#">
-                                        <img src={process.env.PUBLIC_URL + `/assets/images/product-details/1.jpg`} alt="Product Manufacturer Image" />
-                                    </a>
+                                    <Link to={location.pathname}>
+                                        <img src={process.env.PUBLIC_URL + `/assets/images/product-details/1.jpg`} alt="Product Manufacturer" />
+                                    </Link>
                                     <p><span>Reference</span> demo_7</p>
                                     <p><span>Reference</span> demo_7</p>
                                 </div>

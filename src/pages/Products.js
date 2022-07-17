@@ -4,12 +4,13 @@ import { fetchProducts } from '../store/actions/product-actions'
 import Breadcrumb from '../components/breadcrumb/Breadcrumb'
 import Card from '../components/card/Card';
 import Sidebar from '../containers/products/Sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Pagination from '../components/pagination/Pagination';
 
 const Products = () => {
     const products = useSelector(state => state.products.allProducts);
     const dispatch = useDispatch();
+    const location = useLocation()
     const [orderType, setOrderType] = useState('normal')
     const [currentPage, setCurrentPage] = useState(1)
     const [productsPerPage, setProductsPerPage] = useState(5)
@@ -35,9 +36,9 @@ const Products = () => {
                     <div className="row">
                         <div className="col-lg-9 order-1 order-lg-2">
                             <div className="single-banner shop-page-banner">
-                                <a href="#">
+                                <Link to={location.pathname}>
                                     <img src={process.env.PUBLIC_URL + `/assets/images/bg-banner/2.jpg`} alt="Li's Static Banner" />
-                                </a>
+                                </Link>
                             </div>
                             <div className="shop-top-bar mt-30">
                                 <div className="shop-bar-inner">
