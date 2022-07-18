@@ -1,13 +1,28 @@
-import React from 'react'
-import { useSelector } from "react-redux";
+import React, { useCallback } from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import MiniCart from '../../containers/cart/MiniCart';
 import SearchBox from '../../components/form-elements/search-box/SearchBox';
+import { fetchProducts } from '../../store/actions/product-actions';
+import { useFilterHandle } from '../../hooks/useFilterHandle';
 
 const HeaderMiddle = () => {
     const wishlist = useSelector(state => state.wishlist);
-    const handleSearch = (e) => {
-
+    const dispatch = useDispatch()
+    const [filters, onFilter, setFilters] = useFilterHandle(
+        {
+            categoryId: undefined,
+            searchValue: undefined,
+        },
+        ({ filters }) => {
+            if (filters.categoryId, filters.searchValue) {
+                dispatch(fetchProducts(filters))
+            }
+        }
+    );
+    const handleSearch = (categoryId, searchValue) => {
+        onFilter('categoryId', categoryId)
+        onFilter('searchValue', searchValue)
     }
     return (
         <div className="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
@@ -21,7 +36,7 @@ const HeaderMiddle = () => {
                         </div>
                     </div>
                     <div className="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
-                        <SearchBox onSearch={(e) => handleSearch(e)} />
+                        <SearchBox onSearch={(categoryId, searchValue) => handleSearch(categoryId, searchValue)} />
                         <div className="header-middle-right">
                             <ul className="hm-menu">
                                 <li className="hm-wishlist">

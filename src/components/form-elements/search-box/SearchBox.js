@@ -10,7 +10,7 @@ const SearchBox = ({ onSearch }) => {
 
     const handleSearch = (e) => {
         e.preventDefault()
-        onSearch({ [selectVal]: inputVal })
+        onSearch(selectVal, inputVal)
     }
     return (
         <form onSubmit={handleSearch} className="hm-searchbox">
