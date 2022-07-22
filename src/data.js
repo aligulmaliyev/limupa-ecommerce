@@ -1,17 +1,14 @@
 export const brands = [
     {
         id: 1,
-        key: "prime-video",
         name: "Prime Video"
     },
     {
         id: 2,
-        key: "computers",
         name: "Computers"
     },
     {
         id: 3,
-        key: "electronics",
         name: "Electronics"
     }
 ]

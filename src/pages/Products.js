@@ -8,7 +8,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Pagination from '../components/pagination/Pagination';
 
 const Products = () => {
-    const products = useSelector(state => state.products.allProducts);
+    const products = useSelector(state => state.productsReducer.products);
     const dispatch = useDispatch();
     const location = useLocation()
     const [orderType, setOrderType] = useState('normal')
@@ -27,7 +27,7 @@ const Products = () => {
     }
     useEffect(() => {
         dispatch(fetchProducts())
-    }, [dispatch])
+    }, [])
     return (
         <>
             <Breadcrumb page='Products' />
@@ -49,7 +49,7 @@ const Products = () => {
                                         </ul>
                                     </div>
                                     <div className="toolbar-amount">
-                                        <span>Showing {indexOfFirstPost} to {indexOfLastPost} of {products.length}</span>
+                                        <span>Showing {indexOfFirstPost} to {indexOfLastPost} of {products?.length}</span>
                                     </div>
                                 </div>
                                 <div className="product-select-box">
@@ -95,10 +95,10 @@ const Products = () => {
                                     <div className="paginatoin-area">
                                         <div className="row">
                                             <div className="col-lg-6 col-md-6 pt-xs-15">
-                                                <p>Showing {indexOfFirstPost} to {indexOfLastPost} of {products.length} product{products.length > 1 && 's'}</p>
+                                                <p>Showing {indexOfFirstPost} to {indexOfLastPost} of {products?.length} product{products?.length > 1 && 's'}</p>
                                             </div>
                                             <div className="col-lg-6 col-md-6">
-                                                <Pagination itemPerPage={productsPerPage} totalItems={products.length} paginate={paginate} currentPage={currentPage} />
+                                                <Pagination itemPerPage={productsPerPage} totalItems={products?.length} paginate={paginate} currentPage={currentPage} />
                                             </div>
                                         </div>
                                     </div>

@@ -24,11 +24,11 @@ const CATEGORIES = [
 
 const Home = () => {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products.allProducts);
+  const products = useSelector(state => state.productsReducer.products);
 
   useEffect(() => {
     dispatch(fetchProducts())
-  }, [dispatch])
+  }, [])
 
   return (
     <>

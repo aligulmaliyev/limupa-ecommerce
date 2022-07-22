@@ -44,7 +44,7 @@ const Sidebar = () => {
                         <ul>
                             {
                                 brands.map(brand => (
-                                    <li key={brand.id}><input type="checkbox" id={brand.id} name={brand.key} /><label onClick={() => handleBrand(brand.id)} htmlFor={brand.id}>{brand.name}</label></li>
+                                    <li key={brand.id}><input type="checkbox" id={brand.id} name={brand.name} /><label onClick={() => handleBrand(brand.id)} htmlFor={brand.id}>{brand.name}</label></li>
                                 ))
                             }
                         </ul>

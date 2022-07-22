@@ -11,7 +11,7 @@ const ProductsDetail = () => {
     const dispatch = useDispatch();
     const params = useParams()
     const location = useLocation()
-    const products = useSelector(state => state.products.allProducts);
+    const products = useSelector(state => state.productsReducer.products);
     const [tab, setTab] = useState(1);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [product, setProduct] = useState({});
@@ -26,7 +26,7 @@ const ProductsDetail = () => {
     }, [products, id])
 
     useEffect(() => {
-        dispatch(fetchProducts())
+        fetchProducts()
     }, [id])
 
     return (
