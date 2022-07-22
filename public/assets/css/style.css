@@ -4560,14 +4560,15 @@ span.required {
 .categori-checkbox ul li {
   margin: 8px 0;
 }
-.price-checkbox li a,
-.size-checkbox li a,
-.color-categoriy ul li a,
-.categori-checkbox ul li a {
+.price-checkbox li label,
+.size-checkbox li label,
+.color-categoriy ul li label,
+.categori-checkbox ul li label {
   color: #363f4d;
   font-size: 16px;
   margin-left: 15px;
   margin-top: 0;
+  cursor: pointer;
 }
 .price-checkbox input,
 .size-checkbox input,
@@ -4575,7 +4576,7 @@ span.required {
   width: auto !important;
   height: auto !important;
 }
-.price-checkbox li a:hover {
+.price-checkbox li label:hover {
   color: #eb3e32;
 }
 .color-categoriy ul li span {

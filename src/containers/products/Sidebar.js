@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
-import { brands, dimensions, sizes, colors, } from '../../data';
+import { brands, caregories, dimensions, sizes, colors, } from '../../data';
 import { useFilterHandle } from '../../hooks/useFilterHandle';
 import { fetchProducts } from '../../store/actions/product-actions';
 
@@ -9,7 +8,7 @@ const Sidebar = () => {
     const dispatch = useDispatch()
     const [filters, onFilter, setFilters] = useFilterHandle(
         {
-            brands: undefined,
+            brands: [],
             dimensions: undefined,
             colors: undefined,
             sizes: undefined
@@ -20,6 +19,9 @@ const Sidebar = () => {
     );
     const handleBrand = (value) => {
         onFilter('brands', value)
+    }
+    const handleCategory = (value) => {
+        onFilter('category', value)
     }
     const handleDimension = (value) => {
         onFilter('dimensions', value)
@@ -42,7 +44,7 @@ const Sidebar = () => {
                         <ul>
                             {
                                 brands.map(brand => (
-                                    <li key={brand.id}><input type="checkbox" name={brand.key} /><Link onClick={() => handleBrand(brand.id)} to={""}>{brand.name}</Link></li>
+                                    <li key={brand.id}><input type="checkbox" id={brand.id} name={brand.key} /><label onClick={() => handleBrand(brand.id)} htmlFor={brand.id}>{brand.name}</label></li>
                                 ))
                             }
                         </ul>
@@ -55,8 +57,8 @@ const Sidebar = () => {
                     <form action="#">
                         <ul>
                             {
-                                brands.map(brand => (
-                                    <li key={brand.id}><input type="checkbox" name={brand.key} /><Link onClick={() => handleBrand(brand.id)} to={""}>{brand.name}</Link></li>
+                                caregories.map(category => (
+                                    <li key={category.id}><input type="checkbox" id={category.id} name={category.key} /><label onClick={() => handleCategory(category.id)} htmlFor={category.id}>{category.name}</label></li>
                                 ))
                             }
                         </ul>
@@ -72,9 +74,7 @@ const Sidebar = () => {
                                 sizes.map(size => (
                                     <li key={size.id}>
                                         <input type="checkbox" name={size.id} id={size.id} />
-                                        <label htmlFor={size.id}>
-                                            <Link onClick={() => handleSize(size.id)} to={""}>{size.size}</Link>
-                                        </label>
+                                        <label onClick={() => handleSize(size.id)} htmlFor={size.id}>{size.size}</label>
                                     </li>
                                 ))
                             }
@@ -89,7 +89,7 @@ const Sidebar = () => {
                         <ul>
                             {
                                 colors.map(color => (
-                                    <li key={color.id}><span style={{ backgroundColor: color.code }} ></span><Link onClick={() => handleColor(color.id)} to={""}>{color.name}</Link></li>
+                                    <li key={color.id}><span style={{ backgroundColor: color.code }} ></span><label onClick={() => handleColor(color.id)} >{color.name}</label></li>
                                 ))
                             }
                         </ul>
@@ -103,7 +103,7 @@ const Sidebar = () => {
                         <ul>
                             {
                                 dimensions.map(dimension => (
-                                    <li key={dimension.id}><input type="checkbox" name={dimension.name} /><Link onClick={() => handleDimension(dimension.id)} to={""}>{dimension.name}</Link></li>
+                                    <li key={dimension.id}><input type="checkbox" id={dimension.id} name={dimension.name} /><label onClick={() => handleDimension(dimension.id)} htmlFor={dimension.id}>{dimension.name}</label></li>
                                 ))
                             }
                         </ul>

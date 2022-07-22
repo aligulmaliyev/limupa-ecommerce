@@ -15,6 +15,23 @@ export const brands = [
         name: "Electronics"
     }
 ]
+export const caregories = [
+    {
+        id: 1,
+        key: "laptops",
+        name: "Laptops"
+    },
+    {
+        id: 2,
+        key: "electronics",
+        name: "Electronics"
+    },
+    {
+        id: 3,
+        key: "pc",
+        name: "PC"
+    }
+]
 
 export const dimensions = [
     {
