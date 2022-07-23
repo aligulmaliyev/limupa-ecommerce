@@ -18,8 +18,6 @@ const cartSlice = createSlice({
         addToCart(state, action) {
             let newItem = action.payload;
             let existingItem = state.cartItems.find(item => item.id === newItem.id);
-            let totalPrice = state.cartItems.map(cartItem => cartItem.price * cartItem.quantity)[0]
-            let subtotalPrice = state.cartItems.map(cartItem => cartItem.discountPrice ? cartItem.discountPrice * cartItem.quantity : cartItem.price * cartItem.quantity)[0];
 
             if (existingItem) {
                 if (newItem.quantity === 1) {
@@ -35,8 +33,12 @@ const cartSlice = createSlice({
                 state.cartItems.push(newItem);
                 state.totalQuantity++;
             }
-            state.totalPrice = totalPrice
-            state.subtotalPrice = subtotalPrice;
+
+            if (newItem.discountPrice > 0)
+                state.subtotalPrice += newItem.discountPrice * newItem.quantity;
+            if (newItem.discountPrice === 0)
+                state.subtotalPrice += newItem.price * newItem.quantity;
+            state.totalPrice += newItem.price * newItem.quantity;
             Notifilx.Notify.success(newItem.name + " add to cart..");
         },
         removeFromCart(state, action) {
