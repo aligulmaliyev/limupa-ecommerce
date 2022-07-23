@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Notiflix from "notiflix";
 
 const initialState = {
     wishlistItems: [],
@@ -23,10 +24,12 @@ const wishlistSlice = createSlice({
                 localStorage.setItem('wishlist', state.wishlistItems)
                 state.wishlistItems = newWishListItems;
                 state.totalQuantity--;
+                Notiflix.Notify.success(newItem.name + " remove from wishlist..");
             }
             else {
                 state.wishlistItems.push(newItem);
                 state.totalQuantity++;
+                Notiflix.Notify.success(newItem.name + " add to wishlist..");
             }
         },
     }

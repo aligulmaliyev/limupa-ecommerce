@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Notifilx from 'notiflix';
 
 const initialState = {
     cartItems: [],
@@ -35,7 +36,8 @@ const cartSlice = createSlice({
                 state.totalQuantity++;
             }
             state.totalPrice = totalPrice
-            state.subtotalPrice = subtotalPrice
+            state.subtotalPrice = subtotalPrice;
+            Notifilx.Notify.success(newItem.name + " add to cart..");
         },
         removeFromCart(state, action) {
             let newCartItems = state.cartItems.filter(cartItem => cartItem.id !== action.payload);
@@ -52,6 +54,7 @@ const cartSlice = createSlice({
             state.totalPrice -= totalPrice
             state.subtotalPrice -= subtotalPrice
             state.totalQuantity--;
+            Notifilx.Notify.success(findItem.name + " remove from cart..");
         }
     }
 })
