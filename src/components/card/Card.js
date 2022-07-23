@@ -47,11 +47,13 @@ const Card = ({ data, type = 'normal' }) => {
 
     useEffect(() => {
         setDiscount(data?.price, data?.discount);
+        // eslint-disable-next-line
     }, [data]);
 
     useEffect(() => {
         let addedWishList = wishlist.some(item => item.id === data?.id)
-        setAddedWishList(addedWishList)
+        setAddedWishList(addedWishList);
+        // eslint-disable-next-line
     }, [wishlist]);
 
     return (

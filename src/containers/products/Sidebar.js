@@ -6,6 +6,7 @@ import { fetchProducts } from '../../store/actions/product-actions';
 
 const Sidebar = () => {
     const dispatch = useDispatch()
+    // eslint-disable-next-line no-unused-vars
     const [filters, onFilter, setFilters] = useFilterHandle(
         {
             brands: [],

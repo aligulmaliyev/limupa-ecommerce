@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb'
 import * as Yup from 'yup';
 import emailjs from '@emailjs/browser'
+import Notifilx from 'notiflix';
 
 const Contact = () => {
     const form = useRef();
@@ -35,13 +36,10 @@ const Contact = () => {
         onSubmit: (values) => {
             try {
                 emailjs.send('service_804m70k', 'template_utx012q', values, 'BXPAkeohtvKL0Jvwj')
-                    .then((result) => {
-                        formik.resetForm()
-                        console.log(result.text);
-                    }, (error) => {
-                        console.log(error.text);
-                    });
+                formik.resetForm()
+                Notifilx.Notify.success("Sent..")
             } catch (error) {
+                Notifilx.Notify.success(error.text)
 
             }
         }

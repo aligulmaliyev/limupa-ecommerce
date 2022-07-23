@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import MiniCart from '../../containers/cart/MiniCart';
@@ -9,13 +9,14 @@ import { useFilterHandle } from '../../hooks/useFilterHandle';
 const HeaderMiddle = () => {
     const wishlist = useSelector(state => state.wishlist);
     const dispatch = useDispatch()
+    // eslint-disable-next-line no-unused-vars
     const [filters, onFilter, setFilters] = useFilterHandle(
         {
             categoryId: undefined,
             searchValue: undefined,
         },
         ({ filters }) => {
-            if (filters.categoryId, filters.searchValue) {
+            if (filters.categoryId || filters.searchValue) {
                 dispatch(fetchProducts(filters))
             }
         }

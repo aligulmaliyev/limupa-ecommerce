@@ -26,7 +26,8 @@ const Products = () => {
         setOrderType(type)
     }
     useEffect(() => {
-        dispatch(fetchProducts())
+        dispatch(fetchProducts());
+        // eslint-disable-next-line
     }, [])
     return (
         <>

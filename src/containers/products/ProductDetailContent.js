@@ -63,6 +63,7 @@ const ProductDetailContent = ({ children, product, id }) => {
       totalPrice: quantity * product?.price,
       discountPrice: discount.discountedPrice,
     }))
+    // eslint-disable-next-line
   }, [product, imgSrc, selectedDimension, quantity, dispatch]);
 
   useEffect(() => {
@@ -80,11 +81,13 @@ const ProductDetailContent = ({ children, product, id }) => {
   }, [cartItems, product, id]);
 
   useEffect(() => {
-    setDiscount(product?.price, product?.discount)
+    setDiscount(product?.price, product?.discount);
+    // eslint-disable-next-line
   }, [product, id]);
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(fetchProducts());
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -18,6 +18,7 @@ const CartItem = ({ data }) => {
             totalPrice: quantity * data?.price,
             discountPrice: discount.discountedPrice,
         }))
+        // eslint-disable-next-line
     }, [quantity, dispatch])
 
     const removeFromCart = (id) => {
@@ -56,9 +57,11 @@ const CartItem = ({ data }) => {
         if (addedCart) {
             setQuantity(addedCart.quantity)
         }
+        // eslint-disable-next-line
     }, [cartItems])
     useEffect(() => {
         setDiscount(data?.price, data?.discount);
+        // eslint-disable-next-line
     }, [data]);
 
     return (
