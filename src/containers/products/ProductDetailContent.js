@@ -10,6 +10,7 @@ import { fetchProducts } from '../../store/actions/product-actions';
 const ProductDetailContent = ({ children, product, id }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.cartItems);
+  const products = useSelector(state => state.productsReducer.products);
   const location = useLocation()
   const [discount, setDiscount] = useDiscountHandler();
   const [imgSrc, setImgSrc] = useState('1.jpg');
@@ -86,7 +87,10 @@ const ProductDetailContent = ({ children, product, id }) => {
   }, [product, id]);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+     // eslint-disable-next-line
+    if (products.length == 0) {
+      dispatch(fetchProducts());
+    }
     // eslint-disable-next-line
   }, []);
 

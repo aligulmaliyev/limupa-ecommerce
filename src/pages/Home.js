@@ -27,8 +27,9 @@ const Home = () => {
   const products = useSelector(state => state.productsReducer.products);
 
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
+    dispatch(fetchProducts());
+    //eslint-disable-next-line
+  }, [])
 
   return (
     <>

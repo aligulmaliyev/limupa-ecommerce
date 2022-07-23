@@ -27,6 +27,7 @@ const ProductsDetail = () => {
 
     useEffect(() => {
         dispatch(fetchProducts())
+         // eslint-disable-next-line
     }, [id])
 
     return (
