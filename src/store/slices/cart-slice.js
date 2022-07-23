@@ -56,7 +56,7 @@ const cartSlice = createSlice({
             state.totalPrice -= totalPrice
             state.subtotalPrice -= subtotalPrice
             state.totalQuantity--;
-            Notifilx.Notify.success(findItem.name + " remove from cart..");
+            Notifilx.Notify.failure(findItem.name + " remove from cart..");
         }
     }
 })

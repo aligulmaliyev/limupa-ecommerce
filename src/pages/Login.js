@@ -1,9 +1,14 @@
 import { useFormik } from 'formik';
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { authActions } from '../store/slices/auth-slice';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -21,9 +26,11 @@ const Login = () => {
                 .required('This field is required'),
         }),
         onSubmit: (values) => {
-            console.log(values)
+            dispatch(authActions.login(values))
+            navigate('/')
         }
     })
+
     return (
         <>
             <div className="page-section login-form-container">
@@ -58,11 +65,19 @@ const Login = () => {
                                                 <label htmlFor="remember_me">Remember me</label>
                                             </div>
                                         </div>
-                                        <div className="col-md-4 mt-10 mb-20 text-left text-md-right" style={{whiteSpace:'nowrap'}}>
+                                        <div className="col-md-4 mt-10 mb-20 text-left text-md-right" style={{ whiteSpace: 'nowrap' }}>
                                             <Link to="/register"> Create Account</Link>
                                         </div>
                                         <div className="col-md-12">
-                                            <button className="register-button mt-0">Login</button>
+                                            <button className="register-button mt-0" type='submit'>Login</button>
+                                        </div>
+                                    </div>
+                                    <div className='row mt-2'>
+                                        <div className="col-md-6">
+                                            Email: info@limupa.com
+                                        </div>
+                                        <div className="col-md-6">
+                                            Password: 12345678
                                         </div>
                                     </div>
                                 </div>

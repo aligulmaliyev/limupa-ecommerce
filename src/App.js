@@ -32,11 +32,12 @@ function App() {
             <Register />
           </Suspense>}
         />
-        <Route path='/' element={<ProtectedRoute>
-          <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-            <Layout />
-          </Suspense>
-        </ProtectedRoute>} >
+        <Route path='/' element={
+          <ProtectedRoute>
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Layout />
+            </Suspense>
+          </ProtectedRoute>} >
 
           <Route index element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>

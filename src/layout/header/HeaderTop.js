@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/slices/auth-slice';
 
 const HeaderTop = () => {
     const [showSetting, setIsSetting] = useState(false);
     const [showLanguage, setIsLanguage] = useState(false);
     const [showCurrency, setIsCurrency] = useState(false);
-
+    const dispatch = useDispatch();
+    
     return (
         <div className="header-top">
             <div className="container">
@@ -26,7 +29,7 @@ const HeaderTop = () => {
                                         <ul className="ht-setting-list">
                                             <li><NavLink to="/profile">My Account</NavLink></li>
                                             <li><NavLink to="/checkout">Checkout</NavLink></li>
-                                            <li><NavLink to="/login">Sign In</NavLink></li>
+                                            <li><NavLink onClick={() => dispatch(authActions.logout())} to="/login">Logout</NavLink></li>
                                         </ul>
                                     </div>}
                                 </li>
