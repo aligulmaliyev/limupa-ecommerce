@@ -71,6 +71,21 @@
 /*----------------------------------------*/
 /*  1.1 Basic
 /*----------------------------------------*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 body {
   color: #242424;
   font-family: "Rubik", sans-serif;
@@ -887,6 +902,7 @@ textarea:focus {
 /*----------------------------------------*/
 .modal-wrapper {
   display: block !important;
+  overflow: auto;
 }
 .modal-wrapper.modal {
   visibility: hidden;
@@ -3244,6 +3260,7 @@ li.right-menu .cat-mega-menu-2 > li {
   text-transform: capitalize;
 }
 .table-content table td.li-product-price {
+  white-space: nowrap;
   font-size: 16px;
   font-weight: 700;
 }
@@ -4921,6 +4938,7 @@ span.required {
   color: #6f6f6f;
 }
 .li-product-name {
+  white-space: nowrap;
   padding: 10px 0 5px;
   font-size: 13px;
   color: #000;
