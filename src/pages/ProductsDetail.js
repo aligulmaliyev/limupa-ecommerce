@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../components/modal/Modal'
 import Card from '../components/card/Card';
 import ProductDetailContent from '../containers/products/ProductDetailContent'
@@ -8,6 +8,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { fetchProducts } from '../store/actions/product-actions'
 
 const ProductsDetail = () => {
+    const dispatch = useDispatch();
     const params = useParams()
     const location = useLocation()
     const products = useSelector(state => state.productsReducer.products);
@@ -25,7 +26,7 @@ const ProductsDetail = () => {
     }, [products, id])
 
     useEffect(() => {
-        fetchProducts()
+        dispatch(fetchProducts())
     }, [id])
 
     return (
