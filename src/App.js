@@ -10,18 +10,32 @@ const NotFound = React.lazy(() => import("./pages/NotFound"));
 const Products = React.lazy(() => import("./pages/Products"));
 const ProductsDetail = React.lazy(() => import("./pages/ProductsDetail"));
 const WishList = React.lazy(() => import("./pages/WishList"));
+const Login = React.lazy(() => import("./pages/Login"));
+const Register = React.lazy(() => import("./pages/Register"));
 const ScrollToTop = React.lazy(() => import("./components/ScrollToTop"));
+
+
 
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
+
         <Route path='/' element={
           <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
             <Layout />
-          </Suspense>}>
-
+          </Suspense>} >
+          <Route path='/login' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Login />
+            </Suspense>}
+          />
+          <Route path='/register' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Register />
+            </Suspense>}
+          />
           <Route index element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
               <Home />
@@ -69,7 +83,7 @@ function App() {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 

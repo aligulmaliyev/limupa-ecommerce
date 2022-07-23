@@ -16,20 +16,20 @@ const ContactForm = () => {
             name: Yup
                 .string()
                 .max(15, 'Must be 15 characters or less')
-                .required('Required'),
+                .required('This field is required'),
             email: Yup
                 .string()
                 .email('Invalid email address')
-                .required('Required'),
+                .required('This field is required'),
             subject: Yup
                 .string()
                 .max(30, 'Must be 30 characters or less')
-                .required('Required'),
+                .required('This field is required'),
             message: Yup
                 .string()
                 .min(5, 'Must be 5 characters or many')
                 .max(200, 'Must be 15 characters or less')
-                .required('Required'),
+                .required('This field is required'),
         }),
         onSubmit: (values) => {
             try {
