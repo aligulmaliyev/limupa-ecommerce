@@ -1,1 +1,1 @@
-export const API = 'https://b490a6fe-43d6-4ac5-a0f6-ad09af27ee52.mock.pstmn.io';
+export const API = 'https://3566aa35-ead4-4607-a429-a01b473e0cf0.mock.pstmn.io';
