@@ -11,7 +11,7 @@ const store = configureStore({
         wishlist: wishlistSlice.reducer,
         productsReducer: productsSlice.reducer,
     },
-    middleware: [thunk, logger]
+    middleware: [thunk]
 });
 store.subscribe(() => {
     localStorage.setItem('wishlist', JSON.stringify(store.getState().wishlist));

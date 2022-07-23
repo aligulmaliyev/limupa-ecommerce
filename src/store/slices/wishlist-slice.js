@@ -15,7 +15,7 @@ const wishlistSlice = createSlice({
         wishListToggler(state, action) {
             let newItem = action.payload;
             let existingItem = state.wishlistItems.find(item => item.id === newItem.id);
-            if (localStorage.getItem('wishlist') == undefined) {
+            if (localStorage.getItem('wishlist') === undefined) {
                 localStorage.setItem('wishlist', [])
             }
             if (existingItem !== undefined) {

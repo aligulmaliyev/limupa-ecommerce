@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { cartActions } from '../../store/slices/cart-slice';
 import { getDicountValue } from '../../utils/getDiscountValue';
 import { useDiscountHandler } from '../../hooks/useDiscountHandler';
+import { fetchProducts } from '../../store/actions/product-actions';
 
 const ProductDetailContent = ({ children, product, id }) => {
   const dispatch = useDispatch();
@@ -62,12 +63,12 @@ const ProductDetailContent = ({ children, product, id }) => {
       totalPrice: quantity * product?.price,
       discountPrice: discount.discountedPrice,
     }))
-  }, [product, imgSrc, selectedDimension, quantity, dispatch])
+  }, [product, imgSrc, selectedDimension, quantity, dispatch]);
 
   useEffect(() => {
     setDimension(product?.dimension)
     setImages(product?.images)
-  }, [product, id])
+  }, [product, id]);
 
   useEffect(() => {
     let addedCart = cartItems?.find(cartItem => cartItem.id === id);
@@ -76,11 +77,15 @@ const ProductDetailContent = ({ children, product, id }) => {
       setQuantity(addedCart.quantity)
       setAddedCart(addedCart)
     }
-  }, [cartItems, product, id])
+  }, [cartItems, product, id]);
 
   useEffect(() => {
     setDiscount(product?.price, product?.discount)
-  }, [product, id])
+  }, [product, id]);
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, []);
 
   return (
     <div className="content-wraper">

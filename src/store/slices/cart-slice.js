@@ -17,13 +17,8 @@ const cartSlice = createSlice({
         addToCart(state, action) {
             let newItem = action.payload;
             let existingItem = state.cartItems.find(item => item.id === newItem.id);
-            let totalPrice = state.cartItems
-                .map(cartItem => cartItem.price * cartItem.quantity)
-                .reduce((previousValue, currentValue) => previousValue + currentValue, newItem.price)
-
-            let subtotalPrice = state.cartItems
-                .map(cartItem => cartItem.discountPrice ? cartItem.discountPrice * cartItem.quantity : cartItem.price * cartItem.quantity)
-                .reduce((previousValue, currentValue) => previousValue + currentValue, newItem.discountPrice === 0 ? newItem.price : newItem.discountPrice)
+            let totalPrice = state.cartItems.map(cartItem => cartItem.price * cartItem.quantity)[0]
+            let subtotalPrice = state.cartItems.map(cartItem => cartItem.discountPrice ? cartItem.discountPrice * cartItem.quantity : cartItem.price * cartItem.quantity)[0];
 
             if (existingItem) {
                 if (newItem.quantity === 1) {
@@ -45,8 +40,8 @@ const cartSlice = createSlice({
         removeFromCart(state, action) {
             let newCartItems = state.cartItems.filter(cartItem => cartItem.id !== action.payload);
             let findItem = state.cartItems.find(cartItem => cartItem.id === action.payload);
-            let totalPrice = findItem.quantity * findItem.price;
-            let subtotalPrice = 0
+            let totalPrice = findItem.totalPrice;
+            let subtotalPrice = 0;
             if (findItem.discountPrice) {
                 subtotalPrice = findItem.discountPrice * findItem.quantity;
             }
