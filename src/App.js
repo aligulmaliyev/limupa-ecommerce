@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner';
 const Layout = React.lazy(() => import("./layout/Layout"));
 const About = React.lazy(() => import("./pages/About"));
 const Cart = React.lazy(() => import("./pages/Cart"));
@@ -16,16 +17,56 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path='/products' element={<Products />} />
-          <Route path='/products/categories/:categoryId' element={<Products />} />
-          <Route path='/product/:id' element={<ProductsDetail />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/wishlist' element={<WishList />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='*' element={<NotFound />} />
+        <Route path='/' element={
+          <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+            <Layout />
+          </Suspense>}>
+
+          <Route index element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Home />
+            </Suspense>}
+          />
+          <Route path='/products' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Products />
+            </Suspense>}
+          />
+          <Route path='/products/categories/:categoryId' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Products />
+            </Suspense>}
+          />
+          <Route path='/product/:id' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <ProductsDetail />
+            </Suspense>}
+          />
+          <Route path='/cart' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Cart />
+            </Suspense>}
+          />
+          <Route path='/wishlist' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <WishList />
+            </Suspense>}
+          />
+          <Route path='/about' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <About />
+            </Suspense>}
+          />
+          <Route path='/contact' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Contact />
+            </Suspense>}
+          />
+          <Route path='*' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <NotFound />
+            </Suspense>}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
