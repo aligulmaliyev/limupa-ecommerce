@@ -3609,6 +3609,12 @@ thead {
 /*----------------------------------------*/
 /* 6.5 Li's Login Register
 /*----------------------------------------*/
+.login-form-container{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .login-title {
   font-size: 20px;
   line-height: 23px;

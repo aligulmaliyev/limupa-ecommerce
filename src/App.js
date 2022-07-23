@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
+import ProtectedRoute from './ProtectedRoute';
 const Layout = React.lazy(() => import("./layout/Layout"));
 const About = React.lazy(() => import("./pages/About"));
 const Cart = React.lazy(() => import("./pages/Cart"));
@@ -21,21 +22,22 @@ function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-
-        <Route path='/' element={
+        <Route path='/login' element={
+          <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+            <Login />
+          </Suspense>}
+        />
+        <Route path='/register' element={
+          <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+            <Register />
+          </Suspense>}
+        />
+        <Route path='/' element={<ProtectedRoute>
           <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
             <Layout />
-          </Suspense>} >
-          <Route path='/login' element={
-            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-              <Login />
-            </Suspense>}
-          />
-          <Route path='/register' element={
-            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-              <Register />
-            </Suspense>}
-          />
+          </Suspense>
+        </ProtectedRoute>} >
+
           <Route index element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
               <Home />

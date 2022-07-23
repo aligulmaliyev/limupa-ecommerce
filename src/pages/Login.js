@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import * as Yup from 'yup';
 
 const Login = () => {
@@ -27,8 +26,7 @@ const Login = () => {
     })
     return (
         <>
-            <Breadcrumb page='Register' />
-            <div className="page-section mb-60">
+            <div className="page-section login-form-container">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
@@ -60,8 +58,8 @@ const Login = () => {
                                                 <label htmlFor="remember_me">Remember me</label>
                                             </div>
                                         </div>
-                                        <div className="col-md-4 mt-10 mb-20 text-left text-md-right">
-                                            <Link to={""}> Forgotten pasward?</Link>
+                                        <div className="col-md-4 mt-10 mb-20 text-left text-md-right" style={{whiteSpace:'nowrap'}}>
+                                            <Link to="/register"> Create Account</Link>
                                         </div>
                                         <div className="col-md-12">
                                             <button className="register-button mt-0">Login</button>
