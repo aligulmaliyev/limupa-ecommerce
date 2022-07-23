@@ -28,8 +28,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchProducts())
-    // eslint-disable-next-line
-  }, [])
+  }, [dispatch])
 
   return (
     <>
