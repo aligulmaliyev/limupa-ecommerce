@@ -2,9 +2,11 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
 import ProtectedRoute from './ProtectedRoute';
+
 const Layout = React.lazy(() => import("./layout/Layout"));
 const About = React.lazy(() => import("./pages/About"));
 const Cart = React.lazy(() => import("./pages/Cart"));
+const Checkout = React.lazy(() => import("./pages/Checkout"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const Home = React.lazy(() => import("./pages/Home"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -62,6 +64,11 @@ function App() {
           <Route path='/cart' element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
               <Cart />
+            </Suspense>}
+          />
+          <Route path='/checkout' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Checkout />
             </Suspense>}
           />
           <Route path='/wishlist' element={

@@ -3329,10 +3329,18 @@ li.right-menu .cat-mega-menu-2 > li {
   color: #fed700;
 }
 .coupon-content {
+  position: absolute;
   border: 1px solid #e5e5e5;
   margin-bottom: 20px;
-  display: none;
   padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .5s;
+}
+.coupon-content.show {
+  position: static;
+  opacity: 1;
+  visibility: visible;
 }
 .coupon-info p {
   margin-bottom: 0;
@@ -3383,7 +3391,8 @@ p.checkout-coupon input[type="submit"]:hover {
   background: #fed700;
 }
 .form-row > label {
-  margin-top: 7px;
+  margin-top: 12px;
+  margin-left: 5px;
 }
 .coupon-info p.form-row input[type="checkbox"] {
   height: inherit;
@@ -3401,8 +3410,16 @@ p.lost-password a:hover {
   color: #fed700;
 }
 .coupon-checkout-content {
+  position: absolute;
   margin-bottom: 30px;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .5s;
+}
+.coupon-checkout-content.show {
+  position: static;
+  opacity: 1;
+  visibility: visible;
 }
 p.checkout-coupon input[type="text"] {
   background-color: transparent;
@@ -3611,7 +3628,7 @@ thead {
 /*----------------------------------------*/
 /* 6.5 Li's Login Register
 /*----------------------------------------*/
-.login-form-container{
+.login-form-container {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -3824,19 +3841,19 @@ thead {
 .coupon-all input.button:hover {
   background: #fed700;
 }
-@media (max-width:400px){
-  .coupon-all{
+@media (max-width: 400px) {
+  .coupon-all {
     flex-direction: column;
     align-items: flex-start;
   }
-  .coupon{
+  .coupon {
     display: flex;
     width: 100%;
   }
-  .coupon input{
+  .coupon input {
     width: auto;
   }
-  .coupon2{
+  .coupon2 {
     margin-top: 10px;
   }
 }

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Notifilx from 'notiflix';
 
 const initialState = {
     isAuth: false
@@ -15,10 +16,15 @@ const authSlice = createSlice({
             // eslint-disable-next-line
             if (action.payload.email == "info@limupa.com" && action.payload.password == 12345678) {
                 state.isAuth = true;
+                Notifilx.Notify.success("Successful login");
+            }
+            else {
+                Notifilx.Notify.failure("No such user exists");
             }
         },
         logout(state) {
             state.isAuth = false;
+            Notifilx.Notify.success("Successful logout");
         },
     }
 })
