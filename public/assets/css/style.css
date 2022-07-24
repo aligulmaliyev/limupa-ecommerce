@@ -3786,10 +3786,14 @@ thead {
 }
 .coupon-all {
   margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .coupon {
-  float: left;
+  white-space: nowrap;
 }
+
 .coupon input {
   background-color: transparent;
   border: 1px solid #ddd;
@@ -3820,8 +3824,21 @@ thead {
 .coupon-all input.button:hover {
   background: #fed700;
 }
-.coupon2 {
-  float: right;
+@media (max-width:400px){
+  .coupon-all{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .coupon{
+    display: flex;
+    width: 100%;
+  }
+  .coupon input{
+    width: auto;
+  }
+  .coupon2{
+    margin-top: 10px;
+  }
 }
 .cart-page-total {
   padding-top: 30px;
