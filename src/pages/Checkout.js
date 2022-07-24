@@ -5,18 +5,18 @@ import YourOrder from '../containers/checkout/YourOrder'
 
 const Checkout = () => {
     return (
-        <div class="checkout-area pt-60 pb-30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
+        <div className="checkout-area pt-60 pb-30">
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
                         <CuponAccordion />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6 col-12">
+                <div className="row">
+                    <div className="col-lg-6 col-12">
                         <BillingDetails />
                     </div>
-                    <div class="col-lg-6 col-12">
+                    <div className="col-lg-6 col-12">
                         <YourOrder />
                     </div>
                 </div>

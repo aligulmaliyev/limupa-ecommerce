@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import * as Yup from 'yup';
 import { authActions } from '../../store/slices/auth-slice';
 
@@ -38,14 +38,14 @@ const CuponAccordion = () => {
     })
 
     return (
-        <div class="coupon-accordion">
+        <div className="coupon-accordion">
             <h3 >Returning customer? <span onClick={() => handleAccordion(1)} id="showlogin">Click here to login</span></h3>
-            <div id="checkout-login" class={`coupon-content ${accordion === 1 ? 'show' : ''}`}>
-                <div class="coupon-info">
-                    <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
+            <div id="checkout-login" className={`coupon-content ${accordion === 1 ? 'show' : ''}`}>
+                <div className="coupon-info">
+                    <p className="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
                     <form onSubmit={formik.handleSubmit}>
-                        <p class="form-row-first">
-                            <label>Username or email <span class="required">*</span></label>
+                        <p className="form-row-first">
+                            <label>Username or email <span className="required">*</span></label>
                             <input type="text" {...formik.getFieldProps('email')} />
                             {formik.touched.email && formik.errors.email ? (
                                 <div className="alert alert-danger mt-2" role="alert">
@@ -53,8 +53,8 @@ const CuponAccordion = () => {
                                 </div>
                             ) : null}
                         </p>
-                        <p class="form-row-last">
-                            <label>Password  <span class="required">*</span></label>
+                        <p className="form-row-last">
+                            <label>Password  <span className="required">*</span></label>
                             <input type="text"  {...formik.getFieldProps('password')} />
                             {formik.touched.password && formik.errors.password ? (
                                 <div className="alert alert-danger mt-2" role="alert">
@@ -62,20 +62,20 @@ const CuponAccordion = () => {
                                 </div>
                             ) : null}
                         </p>
-                        <p class="form-row">
+                        <p className="form-row">
                             <input value="Login" type="submit" />
                             <input type="checkbox" id="remember_me" />
                             <label htmlFor="remember_me">Remember me</label>
                         </p>
-                        <p class="lost-password"><Link to="/register">Create Account?</Link></p>
+                        <p className="lost-password"><Link to="/register">Create Account?</Link></p>
                     </form>
                 </div>
             </div>
             <h3 >Have a coupon? <span onClick={() => handleAccordion(2)} id="showcoupon">Click here to enter your code</span></h3>
-            <div id="checkout_coupon" class={`coupon-checkout-content ${accordion === 2 ? 'show' : ''}`}>
-                <div class="coupon-info">
+            <div id="checkout_coupon" className={`coupon-checkout-content ${accordion === 2 ? 'show' : ''}`}>
+                <div className="coupon-info">
                     <form action="#">
-                        <p class="checkout-coupon">
+                        <p className="checkout-coupon">
                             <input placeholder="Coupon code" type="text" />
                             <input value="Apply Coupon" type="submit" />
                         </p>

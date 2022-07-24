@@ -4,40 +4,40 @@ import { useSelector } from 'react-redux';
 const YourOrder = () => {
     const cart = useSelector(state => state.cart);
     return (
-        <div class="your-order">
+        <div className="your-order">
             <h3>Your order</h3>
-            <div class="your-order-table table-responsive">
-                <table class="table">
+            <div className="your-order-table table-responsive">
+                <table className="table">
                     <thead>
                         <tr>
-                            <th class="cart-product-name">Product</th>
-                            <th class="cart-product-total">Total</th>
+                            <th className="cart-product-name">Product</th>
+                            <th className="cart-product-total">Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             cart.cartItems.map(cartItem => (
-                                <tr class="cart_item">
-                                    <td class="cart-product-name"> {cartItem.name}<strong class="product-quantity"> × {cartItem.quantity}</strong></td>
-                                    <td class="cart-product-total"><span class="amount">£{cartItem.totalPrice}</span></td>
+                                <tr key={cartItem.id} className="cart_item">
+                                    <td className="cart-product-name"> {cartItem.name}<strong className="product-quantity"> × {cartItem.quantity}</strong></td>
+                                    <td className="cart-product-total"><span className="amount">£{cartItem.totalPrice}</span></td>
                                 </tr>
                             ))
                         }
                     </tbody>
                     <tfoot>
-                        <tr class="cart-subtotal">
+                        <tr className="cart-subtotal">
                             <th>Cart Subtotal</th>
-                            <td><span class="amount">£{cart.totalPrice}</span></td>
+                            <td><span className="amount">£{cart.totalPrice}</span></td>
                         </tr>
-                        <tr class="order-total">
+                        <tr className="order-total">
                             <th>Order Total</th>
-                            <td><strong><span class="amount">£{cart.subtotalPrice}</span></strong></td>
+                            <td><strong><span className="amount">£{cart.subtotalPrice}</span></strong></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
-            <div class="order-button-payment">
-                <input value="Place order" type="submit" />
+            <div className="order-button-payment">
+                <input form='checkout_form' value="Place order" type="submit" />
             </div>
         </div>
     )
