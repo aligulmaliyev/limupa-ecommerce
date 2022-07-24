@@ -1,13 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-function Navbar({ show }) {
+function Navbar() {
+    const isActiveMenu = useSelector(state => state.config.isActiveMenu);
     return (
-        <div className={`header-bottom ${show ? 'active' : ''} header-sticky`}>
+        <div className={`header-bottom ${isActiveMenu ? 'active' : ''} header-sticky`}>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className={`hb-menu ${show ? 'mobile' : ''}`}>
+                        <div className={`hb-menu ${isActiveMenu ? 'mobile' : ''}`}>
                             <nav>
                                 <ul>
                                     <li><NavLink end to="/" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Home</NavLink></li>

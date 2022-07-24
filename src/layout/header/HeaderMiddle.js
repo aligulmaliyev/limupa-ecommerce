@@ -5,9 +5,11 @@ import MiniCart from '../../containers/cart/MiniCart';
 import SearchBox from '../../components/form-elements/search-box/SearchBox';
 import { fetchProducts } from '../../store/actions/product-actions';
 import { useFilterHandle } from '../../hooks/useFilterHandle';
+import { configActions } from '../../store/slices/config-slice';
 
 const HeaderMiddle = () => {
     const wishlist = useSelector(state => state.wishlist);
+    const isActiveMenu = useSelector(state => state.config.isActiveMenu);
     const dispatch = useDispatch()
     // eslint-disable-next-line no-unused-vars
     const [filters, onFilter, setFilters] = useFilterHandle(
@@ -24,6 +26,9 @@ const HeaderMiddle = () => {
     const handleSearch = (categoryId, searchValue) => {
         onFilter('categoryId', categoryId)
         onFilter('searchValue', searchValue)
+    }
+    const menuToggle = () => {
+        dispatch(configActions.menuToggle())
     }
     return (
         <div className="header-middle pl-sm-0 pr-sm-0 pl-xs-0 pr-xs-0">
@@ -48,6 +53,11 @@ const HeaderMiddle = () => {
                                 </li>
                                 <MiniCart />
                             </ul>
+                            <div onClick={menuToggle} className={`mobile-menu-bar ${isActiveMenu ? 'open' : ''}`}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
