@@ -1,15 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/slices/auth-slice';
+import { configActions } from '../../store/slices/config-slice';
 
 const HeaderTop = () => {
-    const isAuth = useSelector(state => state.auth.isAuth);
-    const [showSetting, setIsSetting] = useState(false);
-    const [showLanguage, setIsLanguage] = useState(false);
-    const [showCurrency, setIsCurrency] = useState(false);
     const dispatch = useDispatch();
+    const config = useSelector(state => state.config);
+    const isAuth = useSelector(state => state.auth.isAuth);
 
+    const handleSetting = () => {
+        dispatch(configActions.settingToggle())
+    }
+
+    const handleLanguage = () => {
+        dispatch(configActions.languageToggle())
+    }
+
+    const handleCurrency = () => {
+        dispatch(configActions.currencyToggle())
+    }
     return (
         <div className="header-top">
             <div className="container">
@@ -25,20 +35,22 @@ const HeaderTop = () => {
                         <div className="header-top-right">
                             <ul className="ht-menu">
                                 <li>
-                                    <div className='ht-setting-trigger is-active'><span onClick={() => setIsSetting(prevState => !prevState)}>Setting</span></div>
-                                    {showSetting && <div className='setting ht-setting'>
+                                    {config.setting && <div className='overlay' onClick={handleSetting}></div>}
+                                    <div className='ht-setting-trigger is-active'><span onClick={handleSetting}>Setting</span></div>
+                                    {config.setting && <div className='setting ht-setting'>
                                         <ul className="ht-setting-list">
                                             <li><NavLink to="/profile">My Account</NavLink></li>
                                             <li><NavLink to="/checkout">Checkout</NavLink></li>
-                                            <li><NavLink onClick={() => isAuth ? dispatch(authActions.logout()) : dispatch(authActions.login())} to="/login">{isAuth ? 'Logout' : 'Login'}</NavLink></li>
+                                            { isAuth && <li><NavLink onClick={() =>dispatch(authActions.logout())} to="/login">Logout</NavLink></li>}
                                         </ul>
                                     </div>}
                                 </li>
                                 <li>
+                                    {config.currency && <div className='overlay' onClick={handleCurrency}></div>}
                                     <span className="currency-selector-wrapper">Currency :</span>
-                                    <div className='ht-currency-trigger is-active'><span onClick={() => setIsCurrency(prevState => !prevState)}>USD $</span></div>
+                                    <div className='ht-currency-trigger is-active'><span onClick={handleCurrency}>USD $</span></div>
                                     {
-                                        showCurrency && <div className="currency ht-currency">
+                                        config.currency && <div className="currency ht-currency">
                                             <ul className="ht-setting-list">
                                                 <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} >EUR €</NavLink></li>
                                                 <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} >USD $</NavLink></li>
@@ -47,10 +59,11 @@ const HeaderTop = () => {
                                     }
                                 </li>
                                 <li>
+                                    {config.language && <div className='overlay' onClick={handleLanguage}></div>}
                                     <span className="language-selector-wrapper">Language :</span>
-                                    <div className='ht-language-trigger is-active'><span onClick={() => setIsLanguage(prevState => !prevState)}>English</span></div>
+                                    <div className='ht-language-trigger is-active'><span onClick={handleLanguage}>English</span></div>
                                     {
-                                        showLanguage && <div className="language ht-language">
+                                        config.language && <div className="language ht-language">
                                             <ul className="ht-setting-list">
                                                 <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} ><img src={process.env.PUBLIC_URL + `/assets/images/menu/flag-icon/1.jpg`} alt="" />English</NavLink></li>
                                                 <li><NavLink to="/" className={({ isActive }) => isActive && 'active'} ><img src={process.env.PUBLIC_URL + `/assets/images/menu/flag-icon/2.jpg`} alt="" />Français</NavLink></li>

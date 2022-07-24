@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import MiniCartItem from '../../components/card/MiniCardItem';
 import ButtonLink from '../../components/form-elements/buttons/ButtonLink';
+import { configActions } from '../../store/slices/config-slice';
 
 const MiniCart = () => {
+    const dispatch = useDispatch();
+    const miniCart = useSelector(state => state.config.miniCart);
     const cart = useSelector(state => state.cart);
-    const [showMinicart, setShowMinicart] = useState(false)
+
     const handleMinicart = () => {
-        setShowMinicart(perv => !perv)
+        dispatch(configActions.miniCartToggle())
     }
 
     return (
         <>
-            {showMinicart && <div className='overlay' onClick={handleMinicart}></div>}
+            {miniCart && <div className='overlay' onClick={handleMinicart}></div>}
             <li className="hm-minicart">
                 <div className="hm-minicart-trigger is-active" onClick={handleMinicart}>
                     <span className="item-icon"></span>
@@ -21,7 +24,7 @@ const MiniCart = () => {
                     </span>
                 </div>
                 <span></span>
-                {showMinicart && <div className='minicart'>
+                {miniCart && <div className='minicart'>
                     <ul className="minicart-product-list">
                         {
                             cart.cartItems?.slice(0, 3).map(cartItem => (
