@@ -1,13 +1,15 @@
 import { useFormik } from 'formik';
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import { authActions } from '../store/slices/auth-slice';
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { state } = useLocation();
 
     const formik = useFormik({
         initialValues: {
@@ -27,13 +29,14 @@ const Login = () => {
         }),
         onSubmit: (values) => {
             dispatch(authActions.login(values))
-            navigate('/')
+            navigate(state?.path || "/");
         }
     })
 
     return (
         <>
-            <div className="page-section login-form-container">
+            <Breadcrumb page="Login" />
+            <div className="page-section">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">

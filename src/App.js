@@ -18,29 +18,25 @@ const Register = React.lazy(() => import("./pages/Register"));
 const ScrollToTop = React.lazy(() => import("./components/ScrollToTop"));
 
 
-
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path='/login' element={
-          <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-            <Login />
-          </Suspense>}
-        />
-        <Route path='/register' element={
-          <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-            <Register />
-          </Suspense>}
-        />
         <Route path='/' element={
-          <ProtectedRoute>
+          <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+            <Layout />
+          </Suspense>} >
+          <Route path='/login' element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-              <Layout />
-            </Suspense>
-          </ProtectedRoute>} >
-
+              <Login />
+            </Suspense>}
+          />
+          <Route path='/register' element={
+            <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
+              <Register />
+            </Suspense>}
+          />
           <Route index element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
               <Home />
@@ -68,7 +64,9 @@ function App() {
           />
           <Route path='/checkout' element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-              <Checkout />
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
             </Suspense>}
           />
           <Route path='/wishlist' element={
@@ -78,12 +76,17 @@ function App() {
           />
           <Route path='/about' element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-              <About />
+              <ProtectedRoute>
+                <About />
+              </ProtectedRoute>
+
             </Suspense>}
           />
           <Route path='/contact' element={
             <Suspense fallback={<div className='snipper'><Circles color='#fed700' ariaLabel="loading-indicator" /></div>}>
-              <Contact />
+              <ProtectedRoute>
+                <Contact />
+              </ProtectedRoute>
             </Suspense>}
           />
           <Route path='*' element={

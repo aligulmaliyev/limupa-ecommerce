@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import React from 'react'
 import * as Yup from 'yup';
+import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 
 const Register = () => {
     const formik = useFormik({
@@ -45,7 +46,8 @@ const Register = () => {
     })
     return (
         <>
-            <div className="page-section login-form-container">
+           <Breadcrumb page="Register"/>
+            <div className="page-section">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-sm-12 col-md-12 col-lg-8 col-xs-12">
