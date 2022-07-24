@@ -11,7 +11,7 @@ function Navbar() {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className={`hb-menu ${isActiveMenu ? 'mobile' : ''}`}>
+                        <div className="hb-menu">
                             <nav>
                                 <ul>
                                     <li><NavLink onClick={() => dispatch(configActions.menuToggle())} end to="/" className={({ isActive }) => isActive ? 'active-nav' : undefined}>Home</NavLink></li>
